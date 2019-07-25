@@ -1,0 +1,26 @@
+--CREATE TABLE NBOOKS LIKE BOOKS  in oza101db.oza101ts;                 00461004
+  ALTER TABLE NBOOKS ADD BOOK_AUTHOR CHAR(20);                          00461201
+  commit;                                                               00461308
+  INSERT INTO NBOOKS                                                    00462007
+  (BOOK_ID, BOOK_TITLE, BOOK_COST, BOOK_TYPE, BOOK_AUTHOR)              00462101
+  VALUES ('B0010', 'COBOL PROGRAMMING', 200.25,'PR','stern');           00463001
+                                                                        00464001
+  INSERT INTO NBOOKS                                                    00465006
+  (BOOK_ID, BOOK_TITLE, BOOK_COST, BOOK_TYPE, BOOK_AUTHOR)              00465101
+  VALUES ('B0011', 'JAVA PROGRAMMING', 300.25,'PR','eckel');            00466001
+                                                                        00467001
+  INSERT INTO NBOOKS                                                    00470001
+  (BOOK_ID, BOOK_TITLE, BOOK_COST, BOOK_TYPE, BOOK_AUTHOR)              00471001
+  VALUES ('B0013', 'PROG PEARLS', 100.25,'GN','Bentley');               00480001
+                                                                        00490001
+  INSERT INTO NBOOKS                                                    00500001
+  (BOOK_ID, BOOK_TITLE, BOOK_COST, BOOK_TYPE, BOOK_AUTHOR)              00501001
+  VALUES ('B0014', 'FREAKONOMICS', 200.25,'GN','Steven');               00510001
+                                                                        00520001
+  INSERT INTO NBOOKS                                                    00530001
+  (BOOK_ID, BOOK_TITLE, BOOK_COST, BOOK_TYPE, BOOK_AUTHOR)              00531001
+  VALUES ('B0015', 'THE BLACK SWAN', 300.25,'GN','Taleb');              00540001
+                                                                        00550001
+  INSERT INTO NBOOKS                                                    00560001
+  (BOOK_ID, BOOK_TITLE, BOOK_COST, BOOK_TYPE, BOOK_AUTHOR)              00561001
+  VALUES ('B0016', 'ALCHEMIST', 400.25,'GN','Paulo Coelho')             00570001

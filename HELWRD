@@ -1,0 +1,21 @@
+       IDENTIFICATION DIVISION.                                         00010000
+       PROGRAM-ID. HELWRD.                                              00020000
+      **********************************************************        00021000
+      * DIVISION TO DECLARE VARIABLES                          *        00022000
+      **********************************************************        00023000
+       DATA DIVISION.                                                   00030000
+       WORKING-STORAGE SECTION.                                         00040000
+       01 WS-NUM1 PIC 99.                                               00050002
+       01 WS-ALPH PIC AA.                                               00060002
+       01 WS-ALNM PIC X(5).                                             00061002
+       PROCEDURE DIVISION.                                              00062000
+       A100-MAINPARA.                                                   00063000
+            ACCEPT WS-NUM1.                                             00063102
+            ACCEPT WS-ALPH.                                             00063202
+            ACCEPT WS-ALNM                                              00063302
+            DISPLAY "SHOW THE VALUES"                                   00064001
+            DISPLAY "NUMERIC DATA : " WS-NUM1                           00065002
+            DISPLAY " ALPHA = ", WS-ALPH                                00065102
+            DISPLAY "ALPHANUMERIC : " WS-ALNM                           00065202
+            STOP RUN.                                                   00067000
+                                                                        00070000

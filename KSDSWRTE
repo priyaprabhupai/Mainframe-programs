@@ -1,0 +1,37 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. KSDSWRTE.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT INFILE ASSIGN TO DD1
+           ORGANIZATION IS INDEXED
+           ACCESS MODE IS SEQUENTIAL
+           RECORD KEY IS ENO
+      *    ALTERNATE RECORD KEY IS ENAME WITH DUPLICATES
+           FILE STATUS IS FS1.
+       DATA DIVISION.
+       FILE SECTION.
+       FD INFILE.
+       01 EMPREC.
+          02 ENO    PIC X(4).
+          02        PIC X(1).
+          02 ENAME  PIC A(10).
+          02 FILLER PIC X.
+          02 DNO    PIC XX.
+          02 FILLER PIC X(62).
+       WORKING-STORAGE SECTION.
+       77 FS1 PIC XX.
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+          ACCEPT ENO.
+          ACCEPT ENAME.
+          ACCEPT DNO.
+          PERFORM WRITE-PARA.
+          STOP-RUN.
+       WRITE-PARA.
+          WRITE EMPREC.
+          IF FS1 = 0
+             DISPLAY "WRITE SUCCESS"
+          ELSE
+             DISPLAY "ERROR" FS1
+          END-IF.

@@ -1,0 +1,10 @@
+        ID DIVISION.                                                    00010000
+        PROGRAM-ID. EXAMQ.                                              00020000
+        DATA DIVISION.                                                  00030000
+        WORKING-STORAGE SECTION.                                        00040000
+        01 A.                                                           00050000
+           05 ELE1 PIC X(10).                                           00060001
+           05 B REDEFINES ELE1 PIC S9(4) COMP.                          00080001
+        PROCEDURE DIVISION.                                             00090000
+             DISPLAY "B " B                                             00100000
+             STOP RUN.                                                  00110000

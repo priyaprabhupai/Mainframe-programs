@@ -1,0 +1,60 @@
+IDENTIFICATION DIVISION.
+PROGRAM-ID.  CreateIndexedFromSeq.
+* Creates an indexed file  from a sequential file.
+
+ENVIRONMENT DIVISION.
+INPUT-OUTPUT SECTION.
+FILE-CONTROL.
+   SELECT VFile ASSIGN TO vIDEOFILE
+          ORGANIZATION IS INDEXED
+          ACCESS MODE IS RANDOM
+          RECORD KEY IS VideoCode
+          ALTERNATE RECORD KEY IS VideoTitle
+                      WITH DUPLICATES
+          FILE STATUS IS VideoStatus.
+
+   SELECT SeqVFile ASSIGN TO SEQVIDEOFILE
+        ORGANIZATION IS LINE SEQUENTIAL.
+
+
+DATA DIVISION.
+FILE SECTION.
+FD VFile.
+01 VideoRecord.
+   02 VideoCode                PIC 9(5).
+   02 VideoTitle               PIC X(40).
+   02 VideoSupplierCode       PIC 99.
+
+
+FD SeqVFile.
+01 SeqVideoRecord.
+   88   EndOfFile VALUE HIGH-VALUES.
+   02 SeqVideoCode            PIC 9(5).
+   02 SeqVideoTitle           PIC X(40).
+   02 SeqVideoSupplierCode   PIC 99.
+
+
+
+WORKING-STORAGE SECTION.
+01   VideoStatus               PIC X(2).
+
+PROCEDURE DIVISION.
+Begin.
+   OPEN INPUT SeqVFile.
+   OPEN OUTPUT VFile.
+
+   READ SeqVFile
+      AT END SET EndOfFile TO TRUE
+   END-READ.
+   PERFORM UNTIL EndOfFile
+      WRITE VideoRecord FROM SeqVideoRecord
+         INVALID KEY DISPLAY "VIDEO STATUS :- ", VideoStatus
+      END-WRITE
+      READ SeqVFile
+         AT END SET EndOfFile TO TRUE
+      END-READ
+   END-PERFORM.
+
+   CLOSE VFile, SeqVFile.
+   STOP RUN.
+

@@ -1,0 +1,26 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. MAINPGM.                                             00020008
+       DATA DIVISION.                                                   00030000
+       WORKING-STORAGE SECTION.                                         00040000
+       01 GRP1.                                                         00050000
+          02 VAR1 PIC 99 VALUE 10.                                      00060008
+          02 VAR2 PIC 99 VALUE 20.                                      00070008
+       01 PGM-NAME PIC X(6) VALUE "SUBPGM".                             00080016
+       PROCEDURE DIVISION.                                              00090000
+            CALL PGM-NAME USING BY CONTENT VAR2,BY REFERENCE VAR1.      00091018
+            DISPLAY VAR1                                                00102002
+            DISPLAY VAR2                                                00103002
+                                                                        00104002
+            STOP RUN.                                                   00110001
+       ID DIVISION.                                                     00120011
+       PROGRAM-ID. SUBPGM.                                              00130011
+       DATA DIVISION.                                                   00140011
+       LINKAGE SECTION.                                                 00150011
+       01 VAR1 PIC 99.                                                  00160011
+       01 VAR2 PIC 99.                                                  00170011
+       PROCEDURE DIVISION USING VAR1,VAR2.                              00180011
+            MOVE 11 TO VAR1.                                            00190015
+            MOVE 21 TO VAR2.                                            00200015
+            EXIT PROGRAM.                                               00210011
+       END PROGRAM SUBPGM.                                              00220013
+       END PROGRAM MAINPGM.                                             00230013

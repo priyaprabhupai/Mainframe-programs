@@ -1,0 +1,66 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. RRDSREAD.                                            00020000
+       ENVIRONMENT DIVISION.                                            00030000
+       INPUT-OUTPUT SECTION.                                            00040000
+       FILE-CONTROL.                                                    00050000
+            SELECT EMPFILE ASSIGN TO DD1                                00060000
+            ORGANIZATION IS RELATIVE                                    00070000
+            ACCESS MODE IS DYNAMIC                                      00080000
+            RELATIVE KEY IS WS-RRN                                      00090000
+            FILE STATUS IS FS1.                                         00100000
+       DATA DIVISION.                                                   00110000
+       FILE SECTION.                                                    00120000
+       FD EMPFILE.                                                      00130000
+       01 EMPREC.                                                       00140000
+          05 ENO PIC 99.                                                00150000
+          05 ENAME PIC X(10).                                           00160000
+          05 DNO   PIC X(8).                                            00170000
+       WORKING-STORAGE SECTION.                                         00180000
+       77 WS-RRN PIC 99 VALUE 1.                                        00190001
+       77 FS1    PIC 99.                                                00200000
+       PROCEDURE DIVISION.                                              00430000
+       MAIN-PARA.                                                       00440000
+            OPEN OUTPUT EMPFILE.                                        00450003
+            DISPLAY "FILE STATUS " FS1                                  00460000
+            PERFORM WRITE-PARA 3 TIMES                                  00470000
+            CLOSE EMPFILE                                               00471003
+            OPEN I-O EMPFILE                                            00472003
+            PERFORM READ-PARA.                                          00480000
+            PERFORM REWRITE-PARA                                        00490000
+            PERFORM DELETE-PARA.                                        00500000
+            CLOSE EMPFILE.                                              00510000
+            STOP RUN.                                                   00520000
+         WRITE-PARA.                                                    00530000
+            ADD 1 TO WS-RRN                                             00531001
+            ACCEPT ENO.                                                 00540000
+            ACCEPT ENAME.                                               00550000
+            ACCEPT DNO.                                                 00560000
+            WRITE EMPREC.                                               00570000
+            IF FS1 = 00                                                 00580000
+               DISPLAY "WRITE SUCCESS"                                  00590000
+            ELSE                                                        00600000
+               DISPLAY "ERROR" FS1                                      00610000
+            END-IF.                                                     00620000
+         READ-PARA.                                                     00630000
+            MOVE 3 TO WS-RRN                                            00640000
+            READ EMPFILE                                                00650000
+              INVALID KEY DISPLAY "KEY IS INVALID"                      00670000
+              NOT INVALID KEY DISPLAY "RECORD READ " EMPREC             00680000
+            END-READ.                                                   00690000
+            DISPLAY "READ STATUS " FS1.                                 00700000
+         REWRITE-PARA.                                                  00710000
+            MOVE 2 TO WS-RRN                                            00711000
+            ACCEPT ENO                                                  00712000
+            ACCEPT ENAME                                                00720000
+            ACCEPT DNO                                                  00730000
+            REWRITE EMPREC                                              00740000
+              INVALID KEY DISPLAY "KEY IS INVALID"                      00750000
+              NOT INVALID KEY DISPLAY "REWRITE SUCCESS " EMPREC         00760000
+            END-REWRITE.                                                00770000
+         DELETE-PARA.                                                   00780000
+            DELETE EMPFILE RECORD                                       00790000
+              INVALID KEY DISPLAY "KEY IS NOT PRESENT"                  00800000
+              NOT INVALID KEY DISPLAY "DELETE SUCCESS"                  00810000
+            END-DELETE.                                                 00820000
+            MOVE 2 TO WS-RRN                                            00821002
+            PERFORM READ-PARA.                                          00830000

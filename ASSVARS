@@ -1,0 +1,18 @@
+       IDENTIFICATION DIVISION.                                         00010000
+       PROGRAM-ID. ASSVARS.                                             00020000
+       DATA DIVISION.                                                   00021000
+       WORKING-STORAGE SECTION.                                         00022000
+       01 VAR1 PIC S999V99.                                             00023003
+       01 VAR2 PIC 99.99 BLANK WHEN ZERO.                               00024006
+       01 VAR2A PIC ZZ.ZZ.                                              00024106
+       01 VAR3 PIC X(20) JUSTIFIED RIGHT.                               00025003
+       PROCEDURE DIVISION.                                              00030000
+            MOVE -123.48 TO VAR1.                                       00040005
+            DISPLAY VAR1.                                               00050000
+            MOVE 00.01 TO VAR2.                                         00051007
+            DISPLAY "BWZ = "VAR2.                                       00052003
+            MOVE 10.00 TO VAR2A                                         00052107
+            DISPLAY "ZZZ = "VAR2A                                       00052206
+            MOVE "MANIPAL" TO VAR3.                                     00053003
+            DISPLAY VAR3                                                00054003
+            STOP RUN.                                                   00060000

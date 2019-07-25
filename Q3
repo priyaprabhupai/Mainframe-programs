@@ -1,0 +1,12 @@
+       ID DIVISION.
+       PROGRAM-ID. STREG.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       77 I PIC 99.
+       PROCEDURE DIVISION.
+       000-MAIN-PARA.
+            PERFORM UNTIL I>20
+               ADD 1 TO I
+               DISPLAY "HELLO"
+            END-PERFORM
+            STOP RUN.

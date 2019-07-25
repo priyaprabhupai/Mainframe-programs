@@ -1,0 +1,36 @@
+        ID DIVISION.
+        PROGRAM-ID. SORTFL.
+        ENVIRONMENT DIVISION.
+        INPUT-OUTPUT SECTION.
+        FILE-CONTROL.
+             SELECT INFL ASSIGN TO DD1.
+             SELECT OUTFL ASSIGN TO DD2.
+             SELECT SORT-FILE ASSIGN TO SORTWK01.
+        DATA DIVISION.
+        FILE SECTION.
+        FD INFL
+             RECORD CONTAINS 80.
+        01 IN-REC PIC X(80).
+       FD OUTFL
+           RECORD CONTAINS 80.
+       01 OUT-REC PIC X(80).
+       SD SORT-FILE.
+       01 SORT-REC.
+           05 SORT-FLD PIC X(5).
+           05 FILLER  PIC X(75).
+       PROCEDURE DIVISION.
+      *     MOVE 10 TO RETURN CODE
+            SORT SORT-FILE
+            ASCENDING KEY SORT-FLD
+            INPUT PROCEDURE PARA1 GIVING OUTFL
+            USING INFILE OUTPUT PROCEDURE PARA2.
+      *OUTPUT PROCEDURE PARA2.
+      *     INPUT PROCEDURE PARA1 OUTPUT PROCEDURE PARA2.
+            IF SORT-RETURN NOT = 0
+               DISPLAY "SORT RETURN" SORT-RETURN
+            END-IF
+            STOP RUN.
+         PARA1.
+            DISPLAY "ABC".
+         PARA2.
+            DISPLAY "XYZ".

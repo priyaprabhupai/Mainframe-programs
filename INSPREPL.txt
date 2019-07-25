@@ -1,0 +1,28 @@
+        ID DIVISION.                                              
+        PROGRAM-ID. INSPTAL.                                      
+        DATA DIVISION.                                            
+        WORKING-STORAGE SECTION.                                  
+        01 SRC PIC X(20) VALUE " A A B ABACBCD".                  
+        01 CNTR PIC 99 VALUE 0.                                   
+        PROCEDURE DIVISION.                                       
+        000-MAIN-PARA.                                            
+                                                                  
+             INSPECT SRC REPLACING ALL " " BY "0"                 
+             DISPLAY " BY 0" SRC                                  
+                                                                  
+             MOVE " A A B ABACBCD" TO SRC                         
+             INSPECT SRC REPLACING FIRST SPACE BY ZERO            
+             DISPLAY " BY 0" SRC                                  
+             MOVE "ABABAABD" TO SRC                               
+             INSPECT SRC REPLACING ALL "BC" BY "#$"               
+             DISPLAY " AB BY #$" SRC                              
+             MOVE "ABABAABD" TO SRC                               
+      *      INSPECT SRC REPLACING ALL "ABA" BY "#$"              
+      *      DISPLAY " AB BY #$" SRC                              
+             MOVE "ABCABCAB" TO SRC                               
+             INSPECT SRC CONVERTING "ABC" TO "#$#"                
+             DISPLAY " AB BY #$" SRC                              
+             MOVE "ABCABCAB" TO SRC                               
+             INSPECT SRC CONVERTING "12" TO "#$"                  
+             DISPLAY " AB BY #$" SRC                              
+             STOP RUN.

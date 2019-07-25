@@ -1,0 +1,12 @@
+       ID DIVISION.
+       PROGRAM-ID. Q6.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       77 I PIC 99.
+       PROCEDURE DIVISION.
+            DISPLAY "VALUE OF I BEFORE PERFORM " I
+            PERFORM PARA1 VARYING I FROM 5 BY -1 UNTIL I < 1
+            DISPLAY "VALUE OF I AFTER  PERFORM " I
+            STOP RUN.
+       PARA1.
+            DISPLAY "VALUE OF I " I.

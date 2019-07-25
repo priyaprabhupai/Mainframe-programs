@@ -1,0 +1,32 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. EDIPIC.                                              00020000
+       DATA DIVISION.                                                   00030000
+       WORKING-STORAGE SECTION.                                         00040000
+       01 VAR1.                                                         00050000
+          05 VAR2 PIC ZZZZ9.9.                                          00060002
+          05 VAR2A PIC 99999.9.                                         00061002
+          05 VAR2B PIC XXBXX.                                           00062002
+          05 VAR3 PIC S9(3)P.                                           00070004
+          05 VAR4 PIC S9(3)V99 VALUE 34.23.                             00080000
+          05 VAR5 PIC +99.99.                                           00090000
+          05 VAR6 PIC ***99.                                            00100000
+          05 VAR7 PIC 99CR.                                             00110000
+          05 VAR9 PIC -$$99,99.                                         00130000
+        PROCEDURE DIVISION.                                             00140000
+            MOVE 34.5 TO VAR2.                                          00141002
+            MOVE 34.5 TO VAR2A.                                         00142002
+            MOVE "BANGALORE" TO VAR2B.                                  00143002
+            MOVE 2345 TO VAR3.                                          00150000
+            MOVE 342.34 TO VAR5.                                        00160000
+            MOVE 23445 TO VAR6.                                         00170000
+            MOVE -23 TO VAR7.                                           00180000
+            MOVE -34 TO VAR9.                                           00200000
+            DISPLAY "VAR2=" VAR2.                                       00201001
+            DISPLAY "VAR2A=" VAR2A.                                     00201102
+            DISPLAY "VAR2B=" VAR2B.                                     00201202
+            DISPLAY "VAR3=" VAR3.                                       00202001
+            DISPLAY "VAR4=" VAR4.                                       00203001
+            DISPLAY "VAR5=" VAR5.                                       00204001
+            DISPLAY "VAR6=" VAR6.                                       00205001
+            DISPLAY "VAR7=" VAR7.                                       00206001
+            DISPLAY "VAR9=" VAR9.                                       00208001

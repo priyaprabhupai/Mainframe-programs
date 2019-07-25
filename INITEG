@@ -1,0 +1,16 @@
+        ID DIVISION.                                                    00010000
+        PROGRAM-ID. INITEG.                                             00020000
+        DATA DIVISION.                                                  00030000
+        WORKING-STORAGE SECTION.                                        00040000
+        01 VAR1.                                                        00050000
+           05 ELE1 PIC X(10).                                           00060006
+           05 ELE2 PIC 999 VALUE 12.                                    00070013
+           05      PIC 9(3) VALUE ALL ZEROS.                            00080007
+        PROCEDURE DIVISION.                                             00090000
+           MOVE "9999999999338887" TO VAR1                              00091012
+           INITIALIZE VAR1.                                             00100008
+           DISPLAY "VAR1 : " VAR1.                                      00110013
+           MOVE "ABCDEFGHIJ22" TO VAR1                                  00111012
+           INITIALIZE VAR1 REPLACING NUMERIC DATA BY 678                00112013
+           DISPLAY "VAR1 = " VAR1.                                      00113009
+           STOP RUN.                                                    00120000

@@ -1,0 +1,25 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. COPYEG.                                              00020000
+       DATA DIVISION.                                                   00030000
+       WORKING-STORAGE SECTION.                                         00040000
+              COPY CPYBOOK.                                             00050025
+      *       COPY CPYBOOK REPLACING ==:WS-:== BY ==FS-==               00050126
+      *                              X(5) BY X(3).                      00051026
+      *       COPY CPYBOOK.                                             00051126
+      *       COPY CPYBOOK REPLACING ABC BY XYZ.                        00051227
+      *       COPY CPYBOOK REPLACING "WS-NUM" BY "FS-NUM".              00051328
+      *       COPY CPYBOOK REPLACING WS-NUM BY FS-NUM.                  00051428
+      *       COPY CPYBOOK REPLACING WS-NUM BY FS-NUMR.                 00051528
+              COPY CPYBOOK REPLACING ==V99== BY ====                    00051628
+                                     ==R== BY ==4==.                    00051728
+              COPY CPYBOOK REPLACING ==P== BY ==PQR==.                  00051828
+      *       COPY CPYBOOK REPLACING P BY == BUT PIC IS NOT ==.         00051926
+      *       COPY CPYBOOK REPLACING X(5) BY X(THREE).                  00052026
+      *        COPY CPYBOOK REPLACING ( BY &                            00052126
+      *                              ) BY @.                            00052226
+      *COPY COPYBK1 REPLACING A BY VAR1                                 00052326
+      *                       B BY VAR2                                 00052426
+      *                       C BY VAR3.                                00052526
+       PROCEDURE DIVISION.                                              00052618
+            DISPLAY WS-REC1.                                            00053022
+            STOP RUN.                                                   00054000

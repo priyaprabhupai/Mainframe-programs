@@ -1,0 +1,13 @@
+        ID DIVISION.                                                    00010000
+        PROGRAM-ID. EXAMQ.                                              00020000
+        DATA DIVISION.                                                  00030000
+        WORKING-STORAGE SECTION.                                        00040000
+        01 A.                                                           00050000
+           05 ELE1 PIC X(10) VALUE "BANGALORES".                        00060000
+           05 ELE2 REDEFINES ELE1 PIC X(05).                            00070001
+        77 B PIC X VALUE 'Y'.                                           00080001
+        PROCEDURE DIVISION.                                             00090000
+             DISPLAY "A:" A "B" B                                       00090101
+             MOVE 'PRIYA ' TO ELE2                                      00091000
+             DISPLAY "ELE1 = " ELE1                                     00100000
+             STOP RUN.                                                  00110000

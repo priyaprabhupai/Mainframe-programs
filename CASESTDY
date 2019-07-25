@@ -1,0 +1,104 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. CASESTDY.                                            00020000
+       ENVIRONMENT DIVISION.                                            00030000
+       INPUT-OUTPUT SECTION.                                            00040000
+       FILE-CONTROL.                                                    00050000
+              SELECT SRCFILE ASSIGN TO AS-DD1                           00060000
+              FILE STATUS IS WS-FS1.                                    00070000
+              SELECT RPTFILE ASSIGN TO DD2                              00080000
+              FILE STATUS IS WS-FS2.                                    00090000
+       DATA DIVISION.                                                   00100000
+       FILE SECTION.                                                    00110000
+       FD SRCFILE.                                                      00120000
+       01 SRCREC.                                                       00130000
+          05 SID         PIC 99.                                        00140000
+          05 SDESC       PIC X(10).                                     00150000
+          05 SQTY        PIC 99.                                        00160000
+          05 SPRICE      PIC 9(3).99.                                   00170000
+          05 SSTATUS     PIC A.                                         00180000
+       FD RPTFILE.                                                      00190000
+       01 RPTREC         PIC X(80).                                     00200000
+       WORKING-STORAGE SECTION.                                         00210000
+       01 RPTHDR1.                                                      00220000
+          05 FILLER      PIC X(10) VALUE ALL "*".                       00230000
+          05             PIC X(5)  VALUE " NEW ".                       00231000
+          05 FILLER      PIC X(10) VALUE ALL "*".                       00240000
+       01 RPTHDR2.                                                      00250000
+          05 FILLER      PIC X(10) VALUE ALL "*".                       00260000
+          05             PIC X(6)  VALUE "UPDATE".                      00270000
+          05 FILLER      PIC X(10) VALUE ALL "*".                       00280000
+       01 RPTDET.                                                       00290000
+          05 RID         PIC 99.                                        00300000
+          05 FILLER      PIC X(5).                                      00301000
+          05 RDESC       PIC X(10).                                     00310000
+          05 FILLER      PIC X(5).                                      00311000
+          05 RQTY        PIC 99.                                        00320000
+          05 FILLER      PIC X(5).                                      00321000
+          05 RPRICE      PIC 9(3).99.                                   00330000
+       77 WS-FS1         PIC 99.                                        00340000
+       77 WS-FS2         PIC 99.                                        00350000
+      ******************************************************            00351000
+       PROCEDURE DIVISION.                                              00360000
+       MAIN-PARA.                                                       00370000
+            PERFORM OPEN-PARA                                           00380000
+            CLOSE SRCFILE                                               00381000
+            OPEN INPUT SRCFILE                                          00382000
+            PERFORM READ-U-REC                                          00383000
+            CLOSE SRCFILE                                               00384000
+            OPEN I-O SRCFILE                                            00385000
+            PERFORM READ-D-REC                                          00386000
+            CLOSE SRCFILE                                               00387000
+            STOP RUN.                                                   00388000
+       OPEN-PARA.                                                       00390000
+            OPEN INPUT SRCFILE                                          00400000
+            OPEN OUTPUT RPTFILE                                         00410000
+            IF WS-FS1 = 0 AND WS-FS2 = 0                                00420000
+               PERFORM READ-A-REC                                       00430000
+            ELSE                                                        00440000
+               DISPLAY "OPEN FAILED STATUS : " WS-FS1 " : " WS-FS2      00450000
+            END-IF.                                                     00460000
+       READ-A-REC.                                                      00470000
+            WRITE RPTREC FROM RPTHDR1                                   00480000
+            PERFORM UNTIL WS-FS1 NOT = 0                                00490000
+                READ SRCFILE                                            00500000
+                AT END DISPLAY "END OF FILE REACHED FOR A RECS"         00510000
+                NOT AT END                                              00520000
+                   IF SSTATUS = "A"                                     00530000
+                      MOVE SID     TO RID                               00540000
+                      MOVE SDESC   TO RDESC                             00550000
+                      MOVE SQTY    TO RQTY                              00560000
+                      MOVE SPRICE  TO RPRICE                            00570000
+                      WRITE RPTREC FROM RPTDET                          00580000
+                      DISPLAY "WRITE STS " WS-FS2                       00590000
+                    END-IF                                              00600000
+                 END-READ                                               00610000
+             END-PERFORM.                                               00620000
+       READ-U-REC.                                                      00630000
+            WRITE RPTREC FROM RPTHDR2                                   00640000
+            PERFORM UNTIL WS-FS1 NOT = 0                                00650000
+                READ SRCFILE                                            00660000
+                AT END DISPLAY "END OF FILE REACHED FOR A RECS"         00670000
+                NOT AT END                                              00680000
+                   IF SSTATUS = "U"                                     00690000
+                      MOVE SID     TO RID                               00700000
+                      MOVE SDESC   TO RDESC                             00710000
+                      MOVE SQTY    TO RQTY                              00720000
+                      MOVE SPRICE  TO RPRICE                            00730000
+                      WRITE RPTREC FROM RPTDET                          00740000
+                      DISPLAY "WRITE STS " WS-FS2                       00750000
+                    END-IF                                              00760000
+                 END-READ                                               00770000
+             END-PERFORM.                                               00780000
+       READ-D-REC.                                                      00790000
+             PERFORM UNTIL WS-FS1 NOT 0                                 00800000
+                READ SRCFILE                                            00810000
+                AT END DISPLAY "END OF FILE REACHED"                    00820000
+                NOT AT END                                              00830000
+                    IF SSTATUS = "D"                                    00840000
+                       MOVE SPACES TO SRCREC                            00850000
+                       MOVE "D" TO SSTATUS                              00860000
+                       REWRITE SRCREC                                   00870000
+                       DISPLAY "REWRITE STATUS " WS-FS1 " : " SRCREC    00880000
+                    END-IF                                              00890000
+                END-READ                                                00900000
+              END-PERFORM.                                              00910000

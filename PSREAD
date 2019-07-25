@@ -1,0 +1,43 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. PSREAD.                                              00020003
+      ******************************************                        00030000
+      * READING ALL THE RECORDS OF A FILE      *                        00040003
+      ******************************************                        00050000
+       ENVIRONMENT DIVISION.                                            00060000
+       INPUT-OUTPUT SECTION.                                            00070000
+       FILE-CONTROL.                                                    00080000
+            SELECT STUDFILE ASSIGN TO STUDDD1                           00090000
+            ORGANIZATION IS SEQUENTIAL                                  00100000
+            ACCESS MODE  IS SEQUENTIAL                                  00110000
+            FILE STATUS  IS WS-FS1.                                     00120000
+       DATA DIVISION.                                                   00130000
+       FILE SECTION.                                                    00140000
+       FD STUDFILE.                                                     00150000
+       01 STUDREC.                                                      00160000
+          05 STUDID      PIC 99.                                        00170000
+          05 STUDNAME    PIC X(10).                                     00180000
+          05 STUDCRS     PIC X(5).                                      00190000
+          05 STUDMRKS    PIC 999.                                       00200000
+          05             PIC X(30).                                     00210000
+       WORKING-STORAGE SECTION.                                         00220000
+       01 WS-STUDREC.                                                   00230000
+          05 STUDID      PIC 99.                                        00240000
+          05 STUDNAME    PIC X(10).                                     00250000
+          05 STUDCRS     PIC X(5).                                      00260000
+          05 STUDMRKS    PIC 999.                                       00270000
+          05             PIC X(30).                                     00280000
+       77 WS-FS1         PIC 99.                                        00290000
+       PROCEDURE DIVISION.                                              00300000
+       A100-MAIN-PARA.                                                  00310000
+           OPEN INPUT STUDFILE                                          00320003
+           IF WS-FS1 = 00                                               00330003
+              PERFORM A200-READ-PARA UNTIL WS-FS1 NOT = 0               00340003
+           ELSE                                                         00350003
+              DISPLAY "OPEN FAILED " WS-FS1                             00360003
+           END-IF                                                       00370003
+           CLOSE STUDFILE                                               00371003
+           STOP RUN.                                                    00372003
+       A200-READ-PARA.                                                  00380003
+           READ STUDFILE                                                00390003
+               AT END DISPLAY "END OF FILE REACHED"                     00400003
+               NOT AT END DISPLAY STUDREC.                              00410003

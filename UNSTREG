@@ -1,0 +1,25 @@
+        ID DIVISION.                                                    00010000
+        PROGRAM-ID. STREG.                                              00020000
+        DATA DIVISION.                                                  00030000
+        WORKING-STORAGE SECTION.                                        00040000
+        01 WS-VAR-1   PIC  X(9)  VALUE 'CA/R+R/OT'.                     00050008
+        01 WS-VAR-2   PIC  X(02)  VALUE 'PA'.                           00060008
+        01 WS-VAR-3   PIC  X(02)  VALUE SPACES.                         00070008
+        01 WS-VAR-4   PIC  X(02)  VALUE SPACES.                         00080008
+        01 WS-VAR-5   PIC  X(02)  VALUE SPACES.                         00081008
+        01 WS-VAR-6   PIC  X(02)  VALUE SPACES.                         00081108
+        77 WS-PTR     PIC  99 VALUE 2.                                  00082008
+        77 WS-TAL     PIC  99 VALUE 1.                                  00083003
+        PROCEDURE DIVISION.                                             00090000
+             UNSTRING WS-VAR-1 DELIMITED BY '/' OR '+'                  00100008
+                     INTO WS-VAR-2,WS-VAR-3,                            00101008
+                     WS-VAR-4,WS-VAR-5,WS-VAR-6 WITH POINTER WS-PTR     00110005
+                     TALLYING WS-TAL                                    00110103
+                     ON OVERFLOW DISPLAY "DEST NOT SUFF"                00111003
+                     NOT ON OVERFLOW                                    00112003
+             DISPLAY "C VALUE" WS-VAR-2 ":" WS-VAR-3 ":" WS-VAR-4       00120007
+             DISPLAY WS-VAR-5 ":" WS-VAR-6                              00120107
+             DISPLAY "PTR VALUE " WS-PTR                                00120207
+             DISPLAY "TAL VALUE " WS-TAL                                00120307
+             END-UNSTRING                                               00121004
+             GOBACK.                                                    00130002

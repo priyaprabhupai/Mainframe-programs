@@ -1,0 +1,21 @@
+        ID DIVISION.
+        PROGRAM-ID. Q5.
+        DATA DIVISION.
+        WORKING-STORAGE SECTION.
+        01 VAR PIC XX.
+           88 X VALUE '3','4'.
+           88 Y VALUE '1' THRU '9'.
+           88 A VALUE 'A','B','G' THRU 'J'.
+        PROCEDURE DIVISION.
+           MOVE 'I' TO VAR.
+           EVALUATE TRUE ALSO FALSE
+            WHEN (A AND NOT Y) ALSO X
+                 DISPLAY "FIRST"
+            WHEN X ALSO NOT Y
+                 DISPLAY "SECOND"
+            WHEN X ALSO Y
+                 DISPLAY "THIRD"
+            WHEN OTHER
+                 DISPLAY "FOURTH"
+           END-EVALUATE.
+           STOP RUN.

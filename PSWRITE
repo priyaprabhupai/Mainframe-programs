@@ -1,0 +1,47 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. PSWRITE.                                             00020000
+      ******************************************                        00030000
+      * WRITING A RECORD TO AN EMPTY FILE      *                        00040000
+      ******************************************                        00050000
+       ENVIRONMENT DIVISION.                                            00060000
+       INPUT-OUTPUT SECTION.                                            00070000
+       FILE-CONTROL.                                                    00080000
+            SELECT STUDFILE ASSIGN TO STUDDD1                           00090000
+            ORGANIZATION IS SEQUENTIAL                                  00100000
+            ACCESS MODE  IS SEQUENTIAL                                  00110000
+            FILE STATUS  IS WS-FS1.                                     00120000
+       DATA DIVISION.                                                   00130000
+       FILE SECTION.                                                    00140000
+       FD STUDFILE.                                                     00150000
+       01 STUDREC.                                                      00160000
+          05 STUDID      PIC 99.                                        00170000
+          05 STUDNAME    PIC X(10).                                     00180000
+          05 STUDCRS     PIC X(5).                                      00190000
+          05 STUDMRKS    PIC 999.                                       00200000
+          05             PIC X(30).                                     00210000
+       WORKING-STORAGE SECTION.                                         00220000
+       01 WS-STUDREC.                                                   00230000
+          05 STUDID      PIC 99.                                        00240000
+          05 STUDNAME    PIC X(10).                                     00250000
+          05 STUDCRS     PIC X(5).                                      00260000
+          05 STUDMRKS    PIC 999.                                       00270000
+          05             PIC X(30).                                     00280000
+       77 WS-FS1         PIC 99.                                        00290000
+       PROCEDURE DIVISION.                                              00300000
+       A100-MAIN-PARA.                                                  00310000
+            OPEN EXTEND STUDFILE                                        00320002
+            PERFORM A200-ACCEPT-PARA.                                   00330001
+      *   MOVE WS-STUDREC TO STUDREC                                    00330101
+      *   WRITE STUDREC                                                 00331001
+                                                                        00332001
+            WRITE STUDREC FROM WS-STUDREC                               00333001
+            IF WS-FS1 = 00                                              00334001
+               DISPLAY "WRITE SUCCESS "                                 00335001
+            ELSE                                                        00336001
+               DISPLAY "WRITE FAILED WITH " WS-FS1                      00337001
+            END-IF                                                      00338001
+                                                                        00339001
+            CLOSE STUDFILE                                              00339101
+            STOP RUN.                                                   00339201
+         A200-ACCEPT-PARA.                                              00340001
+            ACCEPT WS-STUDREC.                                          00350001

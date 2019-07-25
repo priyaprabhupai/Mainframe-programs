@@ -1,0 +1,41 @@
+--                                                                      00010012
+-- create procedure mysp1 (parm1 smallint in,                           00580012
+--                         parm2 char(10) inout,                        00590012
+--                         code integer out)                            00600012
+--  external name 'certsp1'                                             00610012
+--  language cobol                                                      00620012
+--  parameter style general                                             00630012
+--  collid db2sps                                                       00640012
+--  asutime limit 2000                                                  00650012
+--  stay resident yes                                                   00660012
+--  dynamic result sets 3                                               00670012
+--  not deterministic                                                   00680012
+--  modifies sql data                                                   00690012
+--  wlm environment myapps                                              00700012
+--  program type main                                                   00710012
+--  run options('TRAP (ON)')                                            00720011
+--  C0MMIT ON RETURN NO                                                 00730012
+        CREATE PROCEDURE EMPDTLSS                                       00740012
+ (                                                                      00750012
+  IN  PEMPNO        CHAR(6)                                             00760012
+ ,OUT PFIRSTNME     VARCHAR(12)                                         00770012
+ ,OUT PMIDINIT      CHAR(1)                                             00780012
+ ,OUT PLASTNAME     VARCHAR(15)                                         00790012
+ ,OUT PWORKDEPT     CHAR(3)                                             00800012
+ ,OUT PHIREDATE     DATE                                                00810012
+ ,OUT PSALARY       DEC(9,2)                                            00820012
+ ,OUT PSQLCODE      INTEGER                                             00830012
+ ,OUT PSQLSTATE     CHAR(5)                                             00840012
+ ,OUT PSQLERRMC     VARCHAR(250)                                        00850012
+ )                                                                      00860012
+ LANGUAGE COBOL                                                         00861013
+ EXTERNAL NAME MYSP1                                                    00862014
+ RESULT SETS 0                                                          00870012
+ MODIFIES SQL DATA                                                      00880012
+ NO DBINFO                                                              00890012
+ WLM ENVIRONMENT DB2GDES1                                               00900012
+ STAY RESIDENT NO                                                       00910012
+ COLLID DEVL7083                                                        00920012
+ PROGRAM TYPE MAIN                                                      00930012
+ RUN OPTIONS 'TRAP(OFF),RPTOPTS(OFF)'                                   00940012
+ COMMIT ON RETURN NO                                                    00950012

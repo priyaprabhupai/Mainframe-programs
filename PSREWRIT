@@ -1,0 +1,55 @@
+      **********************************                                00010000
+      * REWRITE RECORDS FROM PS DATASET *                               00020000
+      **********************************                                00030000
+        ID DIVISION.                                                    00040000
+        PROGRAM-ID. PSREWRIT.                                           00050000
+        ENVIRONMENT DIVISION.                                           00060000
+        INPUT-OUTPUT SECTION.                                           00070000
+        FILE-CONTROL.                                                   00080000
+             SELECT INFILE ASSIGN TO DD1                                00090000
+             ORGANIZATION IS SEQUENTIAL                                 00100000
+             ACCESS MODE IS SEQUENTIAL                                  00110000
+             FILE STATUS IS WS-FS1.                                     00120000
+        DATA DIVISION.                                                  00130000
+        FILE SECTION.                                                   00140000
+        FD INFILE.                                                      00150000
+        01 INREC.                                                       00160000
+           05 FS-ID    PIC 9(10).                                       00170000
+           05 FS-NAME  PIC A(10).                                       00180000
+           05 FS-LOC   PIC X(10).                                       00190000
+        WORKING-STORAGE SECTION.                                        00200000
+        77 WS-FS1      PIC 99.                                          00210000
+        01 WS-INREC.                                                    00211000
+           05 WS-ID    PIC 9(10).                                       00212000
+           05 WS-NAME  PIC A(10).                                       00213000
+           05 WS-LOC   PIC X(10).                                       00214000
+        PROCEDURE DIVISION.                                             00220000
+        A100-MAIN.                                                      00230000
+           PERFORM A200-OPEN-PARA                                       00240000
+           PERFORM B100-REWRITE-PARA                                    00241000
+           PERFORM C100-CLOSE-PARA                                      00242000
+           STOP RUN.                                                    00243000
+        A200-OPEN-PARA.                                                 00250000
+           OPEN I-O    INFILE.                                          00260000
+           DISPLAY "OPEN STATUS " WS-FS1.                               00261000
+        B100-REWRITE-PARA.                                              00270000
+           PERFORM UNTIL WS-FS1 NOT = 0                                 00280000
+              READ INFILE                                               00290000
+                 AT END DISPLAY "RECORD NOT FOUND. EOF REACHED "        00300000
+                 NOT AT END                                             00310000
+                    IF FS-ID = 40                                       00311000
+                       PERFORM D100-UPDATE                              00312000
+                    END-IF                                              00313000
+              END-READ                                                  00314000
+           END-PERFORM.                                                 00315000
+        C100-CLOSE-PARA.                                                00320000
+           CLOSE INFILE.                                                00330000
+        D100-UPDATE.                                                    00340000
+           MOVE 'HYD' TO FS-LOC                                         00350000
+           REWRITE INREC                                                00360000
+           IF WS-FS1 = 0                                                00370000
+              DISPLAY "REWRITE SUCCESS"                                 00380000
+           ELSE                                                         00390000
+              DISPLAY "REWRITE FAILED WITH " WS-FS1                     00400000
+           END-IF                                                       00410000
+           MOVE 10 TO WS-FS1.                                           00420000

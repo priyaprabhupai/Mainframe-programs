@@ -1,0 +1,13 @@
+        ID DIVISION.                                                    00010000
+        PROGRAM-ID. STREG.                                              00020000
+        DATA DIVISION.                                                  00030000
+        WORKING-STORAGE SECTION.                                        00040000
+        01 A PIC X(10) VALUE 'BRUCE'.                                   00050000
+        01 B PIC X(10) VALUE 'WILLIS'.                                  00060000
+        01 C PIC X(20).                                                 00070001
+        PROCEDURE DIVISION.                                             00080000
+             STRING A DELIMITED BY SIZE                                 00090000
+                    B DELIMITED BY SIZE                                 00100000
+                    INTO C                                              00110000
+             DISPLAY "C VALUE" C.                                       00120000
+             STOP RUN.                                                  00130000

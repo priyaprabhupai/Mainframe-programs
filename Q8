@@ -1,0 +1,14 @@
+        id division.
+        program-id. q7.
+        data division.
+        working-storage section.
+        77 a pic 99 value 2.
+        77 b pic 99 value 2.
+        77 c pic 99 value 2.
+        procedure division.
+            PERFORM para1 VARYING A FROM 1 BY 2 UNTIL A>2
+             after B FROM 1 BY 1 UNTIL B>2
+             after C FROM 2 BY -1 UNTIL C<2
+            stop run.
+        para1.
+            display 'i=' a.

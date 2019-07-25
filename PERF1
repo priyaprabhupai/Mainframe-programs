@@ -1,0 +1,25 @@
+       ID DIVISION.                                                     00010000
+        PROGRAM-ID. EXAMQ.                                              00020000
+        DATA DIVISION.                                                  00030000
+        WORKING-STORAGE SECTION.                                        00040000
+        77 I PIC 9 VALUE 1.                                             00050011
+        PROCEDURE DIVISION.                                             00060000
+             MOVE 3 TO I.                                               00061003
+             PERFORM UNTIL I > 10                                       00070000
+             COMPUTE I = I + 1                                          00080000
+             END-PERFORM                                                00100000
+             PERFORM PARA1 THRU PARA3.                                  00101002
+             MOVE 5 TO I.                                               00101105
+             PERFORM PARA4 UNTIL I > 10.                                00102006
+             MOVE 1 TO I.                                               00103005
+             STOP RUN.                                                  00110000
+        PARA1.                                                          00120001
+             DISPLAY "PARA1".                                           00130001
+        PARA2.                                                          00140001
+             DISPLAY "PARA2".                                           00150001
+             PERFORM PARA1.                                             00151001
+        PARA3.                                                          00160001
+             DISPLAY "PARA3".                                           00170001
+        PARA4.                                                          00180001
+             ADD 2 TO I.                                                00190005
+             DISPLAY "PARA4 I VALUE = " I.                              00200005

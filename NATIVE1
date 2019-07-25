@@ -1,0 +1,33 @@
+ CREATE PROCEDURE EMPDTLSS                                              00010000
+ (                                                                      00020000
+  IN  PEMPNO        CHAR(6)                                             00030000
+ ,OUT PFIRSTNME     VARCHAR(12)                                         00040000
+ ,OUT PMIDINIT      CHAR(1)                                             00050000
+ ,OUT PLASTNAME     VARCHAR(15)                                         00060000
+ ,OUT PWORKDEPT     CHAR(3)                                             00070000
+ ,OUT PHIREDATE     DATE                                                00080000
+ ,OUT PSALARY       DEC(9,2)                                            00090000
+ ,OUT PSQLCODE      INTEGER                                             00100000
+ ,OUT PSQLSTATE     CHAR(5)                                             00110000
+ ,OUT PSQLERRMC     VARCHAR(250)                                        00120000
+ )                                                                      00130000
+ RESULT SETS 0                                                          00140000
+ MODIFIES SQL DATA                                                      00150000
+ NO DBINFO                                                              00160000
+ WLM ENVIRONMENT DB2GDES1                                               00170000
+ STAY RESIDENT NO                                                       00180000
+ COLLID DEVL7083                                                        00190000
+ PROGRAM TYPE MAIN                                                      00200001
+ RUN OPTIONS 'TRAP(OFF),RPTOPTS(OFF)'                                   00210001
+ COMMIT ON RETURN NO                                                    00220001
+ LANGUAGE SQL                                                           00221001
+                                                                        00221101
+  BEGIN                                                                 00221201
+    DECLARE SQLCODE INTEGER;                                            00221301
+    DECLARE SQLSTATE CHAR(5);                                           00222001
+    SELECT                                                              00223001
+       FIRSTNME                                                         00224001
+    INTO PFIRSTNME                                                      00225001
+    FROM   EMP                                                          00226001
+    WHERE EMPNO = PEMPNO                                                00227001
+  END                                                                   00228001

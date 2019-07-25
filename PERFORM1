@@ -1,0 +1,21 @@
+        ID DIVISION.                                                    00010000
+        PROGRAM-ID. PERFORM1.                                           00020000
+        DATA DIVISION.                                                  00021000
+        WORKING-STORAGE SECTION.                                        00022000
+        77 WS-VAR PIC 9.                                                00023000
+        PROCEDURE DIVISION.                                             00030000
+        A100-FIRST-PARA.                                                00040000
+             DISPLAY "INSIDE FIRST PARA"                                00050000
+             PERFORM A200-SEC-PARA VARYING WS-VAR FROM 6 BY 2           00062000
+                     UNTIL WS-VAR > 5                                   00063000
+             DISPLAY "AFTER ALL PARAS"                                  00070000
+             STOP RUN.                                                  00080000
+        A200-SEC-PARA.                                                  00090000
+             DISPLAY "WS-VAR : " WS-VAR                                 00091000
+             DISPLAY " INSIDE SEC PARA".                                00100000
+        A300-SIXTH-PARA.                                                00130000
+             DISPLAY "INSIDE THIRD PARA".                               00140000
+        A400-FORTH-PARA.                                                00150000
+             DISPLAY "INSIDE FOUTH PARA".                               00160000
+        A500-FIF-PARA.                                                  00170000
+             DISPLAY "INSIDE FIFTH PARA".                               00180000

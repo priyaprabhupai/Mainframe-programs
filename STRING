@@ -1,0 +1,25 @@
+       ID DIVISION.
+       PROGRAM-ID. STREG.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 ADDRSS.
+            05 HOUSE-NO PIC 999 VALUE 45.
+            05 STREET-DET PIC X(20) VALUE "MELB TURN LEFT".
+           05 PIN-CD  PIC X(9) VALUE "1234  ".
+       77 ADDR PIC X(30).
+       77 WS-PTR PIC 99 VALUE 3.
+       PROCEDURE DIVISION.
+       000-MAIN-PARA.
+           MOVE ALL "*" TO ADDR
+            STRING
+               "#" DELIMITED BY SIZE
+           HOUSE-NO DELIMITED BY SIZE
+           " " DELIMITED BY SIZE
+           STREET-DET DELIMITED BY 'T'
+           PIN-CD DELIMITED BY SPACES
+           INTO ADDR
+           WITH POINTER WS-PTR
+           ON OVERFLOW DISPLAY "DEST TOO SHORT"
+           NOT ON OVERFLOW DISPLAY "STRING IS " ADDR " LENGTH " WS-PTR
+            END-STRING
+            STOP RUN.

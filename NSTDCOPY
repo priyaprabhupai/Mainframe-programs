@@ -1,0 +1,8 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. COPYEG.                                              00020000
+       DATA DIVISION.                                                   00030000
+       WORKING-STORAGE SECTION.                                         00040000
+       01 NUMDATA PIC XX. COPY COPYBK1.                                 00050006
+       PROCEDURE DIVISION.                                              00051500
+            DISPLAY "EXAMPLE".                                          00051604
+            STOP RUN.                                                   00051700

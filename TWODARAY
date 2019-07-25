@@ -1,0 +1,28 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. ARRAY2D.
+       ENVIRONMENT DIVISION.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 ARRWEEK.
+          02 WKDAY OCCURS 7 TIMES.
+             03 ADAY PIC A(3).
+             03 DTEMP OCCURS 2 TIMES.
+                04 MAXTEMP PIC 99.
+                04 MINTEMP PIC 99.
+       77 I       PIC 9.
+       77 J       PIC 9.
+       PROCEDURE DIVISION.
+       INPUT-PARA.
+            PERFORM VARYING I FROM 1 BY 1 UNTIL I > 7
+               ACCEPT WKDAY(I)
+            END-PERFORM.
+       OUTPUT-PARA.                                             DISPLAY " TEMPER
+            PERFORM VARYING I FROM 1 BY 1 UNTIL I > 7
+                DISPLAY "TEMPERATURE OF " ADAY(I)
+               PERFORM VARYING J FROM 1 BY 1 UNTIL J > 2
+                 DISPLAY  " MAX IS " MAXTEMP(I,J)
+                 DISPLAY  " MIN IS " MINTEMP(I,J)
+               END-PERFORM
+               DISPLAY "------------------------------"
+            END-PERFORM.
+            STOP RUN.

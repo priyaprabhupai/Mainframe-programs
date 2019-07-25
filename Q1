@@ -1,0 +1,32 @@
+       ID DIVISION.
+       PROGRAM-ID. STREG.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 VARS.
+          05 ADDR PIC X(10) VALUE 'SDF' SYNCHRONIZED.
+          05 ABC  PIC XXX VALUE 'A' JUSTIFIED.
+          05 ABC  PIC 999 USAGE COMP.
+       77 VAR1 PIC 99.
+       01 TBL.
+          05 ELE1 PIC XX OCCURS 1 TO 5 TIMES DEPENDING ON VAR1.
+          05 ELE2 PIC XX.
+       LINKAGE SECTION.
+       01 LK-VAR1.
+          02 LK-ELE1 PIC XX VALUE 'AB'.
+       PROCEDURE DIVISION USING LK-VAR1.
+       000-MAIN-PARA.
+            DISPLAY ADDR.
+            DISPLAY ABC.
+            DISPLAY ELE2.
+      *     MOVE "MAINF" TO VAR1
+            DISPLAY VAR1.
+      *     MOVE "MA" TO VAR1
+            DISPLAY VAR1.
+            STRING
+               VAR1 DELIMITED BY "/"
+               ": " DELIMITED BY SPACE
+               "PRIYA" DELIMITED BY 'I'
+            INTO ADDR
+            END-STRING
+            DISPLAY "STRING IS " ADDR
+            STOP RUN.

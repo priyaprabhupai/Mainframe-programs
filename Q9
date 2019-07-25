@@ -1,0 +1,11 @@
+        id division.
+        program-id. q9.
+        data division.
+        working-storage section.
+        77 a pic 99 value 0.
+        procedure division.
+           compute a = 5 * 6 - 8 * 2
+           display " a " a
+           compute a = (5 * 6 ) - (8 * 2)
+           display " a = " a
+           stop run.

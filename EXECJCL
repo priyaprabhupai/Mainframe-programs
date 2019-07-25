@@ -1,0 +1,7 @@
+//OZA101E JOB NOTIFY=&SYSUID                                            00010000
+//STEP1   EXEC PGM=ASSVARS                                              00020003
+//STEPLIB DD DSN=OZA101.PRIYA.COBOL.LOADLIB,DISP=SHR                    00030000
+//SYSIN DD *                                                            00040001
+50                                                                      00050002
+25                                                                      00060002
+/*                                                                      00080001

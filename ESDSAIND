@@ -1,0 +1,38 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. ESDSALT.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT INFILE ASSIGN TO AS-DD1
+           ORGANIZATION IS SEQUENTIAL
+           ACCESS MODE IS SEQUENTIAL
+           ALTERNATE RECORD KEY IS ENAME
+           FILE STATUS IS FS1.
+       DATA DIVISION.
+       FILE SECTION.
+       FD INFILE.
+       01 EMPREC.
+          02 ENO    PIC X(4).
+          02        PIC X(1).
+          02 ENAME  PIC X(10).
+          02 FILLER PIC X.
+          02 DNO    PIC X(3).                                     02        PIC
+      WORKING-STORAGE SECTION.
+      77 FS1    PIC 99.
+      PROCEDURE DIVISION.
+      OPEN-PARA.
+           DISPLAY "WELCOME TO FILE PROGRAMMING".
+           OPEN INPUT INFILE.
+           DISPLAY " OPEN FILE STATUS : " FS1.
+      READ-PARA.
+           READ INFILE AT END GO TO CLOSE-PARA.
+           IF FS1 = 0 THEN
+              DISPLAY " EMPLOYEE NO   : " ENO
+              DISPLAY " EMPLOYEE NAME : " ENAME
+              DISPLAY " DEPARTMENT    : " DNO
+           ELSE
+              DISPLAY "RECORD READ ERROR : " FS1
+           END-IF.
+           GO TO READ-PARA.
+      CLOSE-PARA.
+      stop run.

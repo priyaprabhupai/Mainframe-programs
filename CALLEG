@@ -1,0 +1,17 @@
+        ID DIVISION.                                                    00010000
+        PROGRAM-ID. CALLEG.                                             00020005
+        DATA DIVISION.                                                  00030000
+        WORKING-STORAGE SECTION.                                        00040000
+        01 A PIC X(10) VALUE 'BRUCE'.                                   00050000
+        01 B PIC X(10) VALUE 'WILLIS'.                                  00060000
+        01 C PIC X(20).                                                 00070000
+        PROCEDURE DIVISION.                                             00080000
+             CALL 'SUBPGM' USING BY CONTENT A, BY REFERENCE B           00090007
+             CALL 'SUBPGM' USING A,B                                    00100004
+      * AN EXCEPTION CONDITION OCCURS WHEN THE CALLED SUBPROGRAM CANNOT 00110105
+      * BE MADE AVAILABLE                                               00110205
+             CALL 'SUBPM' USING A,B ON EXCEPTION PERFORM PARA2.         00111006
+             CALL 'SUBPM' USING A,B ON OVERFLOW PERFORM PARA2.          00112006
+             GOBACK.                                                    00120000
+        PARA2.                                                          00150003
+             DISPLAY "THERE IS AN EXCEPTION".                           00160003

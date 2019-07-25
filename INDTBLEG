@@ -1,0 +1,31 @@
+        ID DIVISION.                                                    00010000
+        PROGRAM-ID. INDTBLEG.                                           00020000
+        DATA DIVISION.                                                  00030000
+        WORKING-STORAGE SECTION.                                        00040000
+        01 TBL.                                                         00050000
+           02 STUD OCCURS 2 TIMES INDEXED BY IDX1.                      00051000
+              05 S-ID         PIC 99.                                   00060000
+              05 S-MK         PIC 999 OCCURS 3 TIMES INDEXED BY IDX2.   00070000
+              05 S-TOT        PIC 9999 VALUE 0.                         00080000
+        PROCEDURE DIVISION.                                             00090000
+        A100-MAIN.                                                      00100000
+             PERFORM ACCEPT-PARA.                                       00110000
+             PERFORM COMPU-PARA.                                        00120000
+             PERFORM DISP-PARA.                                         00130000
+             STOP RUN.                                                  00140000
+        ACCEPT-PARA.                                                    00150000
+             PERFORM VARYING IDX1 FROM 1 BY 1 UNTIL IDX1 > 2            00160000
+                 ACCEPT S-ID(IDX1)                                      00170000
+                 PERFORM VARYING IDX2 FROM 1 BY 1 UNTIL IDX2 > 3        00180000
+                    ACCEPT S-MK(IDX1,IDX2)                              00190000
+                 END-PERFORM                                            00200000
+             END-PERFORM.                                               00210000
+        COMPU-PARA.                                                     00220000
+             PERFORM TOT-PARA VARYING IDX1 FROM 1 BY 1 UNTIL IDX1 > 2   00230000
+                  AFTER IDX2 FROM 1 BY 1 UNTIL IDX2 > 3.                00240000
+        TOT-PARA.                                                       00241000
+                 COMPUTE S-TOT(IDX1) = S-TOT(IDX1) + S-MK(IDX1,IDX2).   00250000
+        DISP-PARA.                                                      00270000
+             PERFORM VARYING IDX1 FROM 1 BY 1 UNTIL IDX1 > 2            00280000
+                 DISPLAY S-ID(IDX1) " SCORES " S-TOT(IDX1)              00290000
+             END-PERFORM.                                               00300000

@@ -1,0 +1,24 @@
+        ID DIVISION.                                                   
+        PROGRAM-ID. STREG.                                             
+        DATA DIVISION.                                                 
+        WORKING-STORAGE SECTION.                                       
+        01 WS-VAR-1   PIC  X(12)  VALUE 'MISSISSIPPI'.                 
+        01 WS-VAR-2   PIC  X(04)  VALUE SPACES.                        
+        01 WS-VAR-3   PIC  X(04)  VALUE SPACES.                        
+        01 WS-VAR-4   PIC  X(04)  VALUE SPACES.                        
+        01 WS-VAR-5   PIC  X(04)  VALUE SPACES.                        
+        01 WS-VAR-6   PIC  X(04)  VALUE SPACES.                        
+        77 WS-PTR     PIC  99 VALUE 1.                                 
+        77 WS-TAL     PIC  99 VALUE 1.                                 
+        PROCEDURE DIVISION.                                            
+             UNSTRING WS-VAR-1 DELIMITED BY 'S' INTO WS-VAR-2,WS-VAR-3,
+                     WS-VAR-4,WS-VAR-5,WS-VAR-6 WITH POINTER WS-PTR    
+                     TALLYING WS-TAL                                   
+                     ON OVERFLOW DISPLAY "DEST NOT SUFF"               
+                     NOT ON OVERFLOW                                   
+             DISPLAY "C VALUE" WS-VAR-2 ":" WS-VAR-3 ":" WS-VAR-4      
+             DISPLAY WS-VAR-5 ":" WS-VAR-6                             
+             DISPLAY "PTR VALUE " WS-PTR                               
+             DISPLAY "TAL VALUE " WS-TAL                               
+             END-UNSTRING                                              
+             GOBACK.                                                   

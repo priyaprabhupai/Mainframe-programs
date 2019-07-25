@@ -1,0 +1,10 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. COPYEG.                                              00020000
+       DATA DIVISION.                                                   00030000
+       WORKING-STORAGE SECTION.                                         00040000
+              COPY CPYBOOK.                                             00050010
+                                                                        00052004
+       PROCEDURE DIVISION.                                              00060000
+            MOVE 'PRIYA' TO ENAME                                       00061009
+            DISPLAY ENAME.                                              00070010
+            STOP RUN.                                                   00080000

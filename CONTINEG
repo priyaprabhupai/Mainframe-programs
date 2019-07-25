@@ -1,0 +1,22 @@
+        ID DIVISION.                                                    00010000
+        PROGRAM-ID. EXAMQ5.                                             00020000
+        DATA DIVISION.                                                  00030000
+        WORKING-STORAGE SECTION.                                        00040000
+        77 VAR1 PIC 9 VALUE 1.                                          00050000
+        PROCEDURE DIVISION.                                             00060000
+        000-MAIN-PARA.                                                  00070000
+            PERFORM 3 TIMES                                             00080003
+                COMPUTE VAR1 = VAR1 + 1                                 00090000
+                IF VAR1 = 3                                             00100000
+                   NEXT SENTENCE                                        00110003
+                ELSE                                                    00120000
+                   DISPLAY "A"                                          00130000
+                   CONTINUE                                             00140000
+                   DISPLAY "B"                                          00141003
+                END-IF                                                  00150000
+                DISPLAY "BEFORE END-PERFORM"                            00151003
+            END-PERFORM.                                                00160000
+            DISPLAY "BEFORE STOP RUN"                                   00161003
+            STOP RUN.                                                   00170000
+        PARA2.                                                          00180000
+            DISPLAY "PARA2".                                            00190000

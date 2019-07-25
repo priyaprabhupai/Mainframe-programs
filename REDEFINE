@@ -1,0 +1,35 @@
+       ID DIVISION.
+       PROGRAM-ID. REDEFEG.
+      *****************************************
+      * REDEF ALLOWS VARS TO USE SAME STORAGE *
+      * BOTH LEVEL NOS SHOULD BE SAME         *
+      * LEVEL NOS CAN'T BE 66 OR 88 OR 01     *
+      * REDEFINED ITEM CANNOT HAVE OCCURS     *
+      * EXPLICIT REDEFINITION FOR MULT REC BUF*
+      *****************************************
+       DATA DIVISION.
+       FILE SECTION.
+      ***** EXPLICIT REDEFINITION ********
+       FD INFILE.
+       01 INREC1.
+          05 IID   PIC X(10).
+          05 INAME PIC X(10).
+          05 SAL   PIC 9(10).
+       01 INREC2.
+          02 ROLL  PIC X(10).
+          02 RNAME PIC X(10).
+          02 GRADE PIC X.
+          02       PIC X(9).
+       WORKING-STORAGE SECTION.
+       01 DATA-NAMES.
+           05 ALPHA  PIC X.
+           05 ALPHA-ARR REDEFINES ALPHA OCCURS 26 TIMES.
+              10 ELE PIC X(26).
+           05 I      PIC 99    VALUE 1.
+        PROCEDURE DIVISION.
+        MAIN-PARA.
+            PERFORM 26 TIMES
+               DISPLAY ELE(I)
+               ADD 1 TO I
+            END-PERFORM
+            STOP RUN.

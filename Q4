@@ -1,0 +1,11 @@
+       ID DIVISION.
+       PROGRAM-ID. STREG.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 TBL.
+          05 ELE2 OCCURS 5 TIMES PIC 99.
+       PROCEDURE DIVISION.
+       000-MAIN-PARA.
+            MOVE 1122334455 TO TBL.
+            DISPLAY ELE2(2).
+            STOP RUN.

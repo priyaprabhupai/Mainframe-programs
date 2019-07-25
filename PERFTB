@@ -1,0 +1,15 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. PERFTB.                                              00020000
+       DATA DIVISION.                                                   00030000
+       WORKING-STORAGE SECTION.                                         00040000
+       01 I PIC 99 VALUE 1.                                             00050004
+       PROCEDURE DIVISION.                                              00060000
+           DISPLAY "TRYING WITH TEST BEFORE"                            00061001
+           PERFORM WITH TEST BEFORE UNTIL I < 5                         00070006
+                DISPLAY "BEFORE : I = " I                               00080001
+           END-PERFORM                                                  00090000
+           DISPLAY "TRYING WITH TEST AFTER"                             00091001
+           PERFORM WITH TEST AFTER UNTIL I < 5                          00092003
+                DISPLAY "AFTER : I = " I                                00093001
+           END-PERFORM                                                  00094001
+           STOP RUN.                                                    00100000

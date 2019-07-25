@@ -1,0 +1,37 @@
+       ID DIVISION.
+       PROGRAM-ID. STREG.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 VARS2.
+          05 RBC   PIC XX VALUE 'AB'.
+          05 ABC   REDEFINES RBC PIC XXX.
+       01 RES PIC 9999.99.
+       77 A PIC 9 VALUE 5.
+       77 D PIC X VALUE '5'.
+       77 B PIC 99 VALUE 10.
+       77 C PIC 9 VALUE 2.
+       77 WS-VAR1 PIC 99V99.
+       77 WS-VAR2 PIC 99V99.
+       77 WS-VAR3 PIC 99.99.
+
+       PROCEDURE DIVISION.
+       000-MAIN-PARA.
+            IF (D NUMERIC) DISPLAY D.
+
+            MOVE 1 TO A.
+            PERFORM UNTIL A > 5
+               MOVE 6 TO A
+               DISPLAY "A: " A
+            END-PERFORM
+            STOP RUN.
+            MOVE 99.99 TO WS-VAR1 WS-VAR2
+            ADD WS-VAR1 TO WS-VAR2 GIVING WS-VAR3 ON SIZE ERROR
+                  PERFORM PARA1.
+            COMPUTE RES=23+A*B/C+A**C
+            DISPLAY RES
+            MOVE RBC TO RBC
+            DISPLAY "RBC:" RBC.
+            STOP RUN.
+       PARA1.
+            DISPLAY "THERE IS SIZE ERROR IN THE ADD LOGIC".
+            STOP RUN.

@@ -1,0 +1,18 @@
+         ID DIVISION.                                                   00010000
+         PROGRAM-ID. NXTSENT.                                           00020000
+         DATA DIVISION.                                                 00030000
+         WORKING-STORAGE SECTION.                                       00040000
+         77 I PIC 99 VALUE 1.                                           00050000
+         PROCEDURE DIVISION.                                            00060000
+         PARA1.                                                         00070000
+              MOVE 2 TO I                                               00080000
+                 IF I = 2                                               00090000
+                    NEXT SENTENCE                                       00100000
+                 ELSE                                                   00110000
+                    CONTINUE                                            00120000
+                    DISPLAY "AFTER CONTINUE IN ELSE".                   00121000
+                 ADD 1 TO I                                             00131000
+                 DISPLAY "OUTSIDE IF;INSIDE PERFORM".                   00140000
+         PARA2.                                                         00160000
+              DISPLAY "IN PARA2"                                        00170000
+              STOP RUN.                                                 00180000

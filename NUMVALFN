@@ -1,0 +1,15 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID.NUMBALFN.                                             00020000
+       DATA DIVISION.                                                   00030000
+       WORKING-STORAGE SECTION.                                         00040000
+       77 WS-VAR1 PIC 99.99.                                            00050003
+       77 WS-VAR2 PIC 99V99 VALUE 30.23.                                00060003
+       PROCEDURE DIVISION.                                              00070000
+            MOVE 30.22 TO WS-VAR1                                       00071003
+      *     IF WS-VAR1 > WS-VAR2                                        00072003
+            IF FUNCTION NUMVAL(WS-VAR1) > WS-VAR2                       00080003
+               DISPLAY "WS-VAR1 GREATER"                                00090002
+            ELSE                                                        00100002
+               DISPLAY "WS-VAR1 SMALLER"                                00110002
+            END-IF                                                      00120002
+            STOP RUN.                                                   00130002

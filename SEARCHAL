@@ -1,0 +1,24 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. ASRCHALL.
+       ENVIRONMENT DIVISION.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 ARRWEEK VALUE 'FRIMONSATSUNTHUTUEWED'.
+          02 WK-DAY OCCURS 7 TIMES ASCENDING KEY IS ADAY
+                                   INDEXED BY INDX.
+             03 ADAY PIC A(3).
+       77 SDAY    PIC A(3).
+       77 I       PIC 9.
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+            DISPLAY " SEARCH ARRAY - DEMO".
+            ACCEPT SDAY.
+            DISPLAY " ELEMENT TO BE SEARCHED IS " SDAY.
+       SEARCH-PARA.
+            SEARCH ALL WK-DAY AT END DISPLAY "ELEMENT NOT FOUND"
+                 WHEN ADAY(INDX) = SDAY
+                   DISPLAY " ELEMENT FOUND SUCCESSFULLY"
+                   SET I TO INDX
+                   DISPLAY " DAY " I " IS " ADAY(INDX)
+            END-SEARCH.
+            STOP RUN.

@@ -1,0 +1,15 @@
+        CBL NOSSRANGE.                                                  00001005
+        ID DIVISION.                                                    00010000
+        PROGRAM-ID. STREG.                                              00020000
+        DATA DIVISION.                                                  00030000
+        WORKING-STORAGE SECTION.                                        00040000
+        01 VAR1 VALUE 'ABC123DEFGHIRGEHAISLKHD'.                        00050003
+        05 VAR2 PIC X.                                                  00060000
+        05 VAR3.                                                        00070000
+           10 VAR4 OCCURS 3  TIMES.                                     00071000
+              12 VAR5 PIC XX OCCURS 4 TIMES.                            00072000
+        PROCEDURE DIVISION.                                             00080000
+             DISPLAY VAR4(1)                                            00081001
+             DISPLAY VAR4(2)                                            00090000
+             DISPLAY VAR4(7)                                            00100004
+             STOP RUN.                                                  00130000

@@ -1,0 +1,10 @@
+        id division.
+        program-id. q9.
+        data division.
+        working-storage section.
+        77 a pic 99V9 value 98.0.
+        77 b pic 99v99 value 26.22.
+        procedure division.
+           add b to a on size error display "batch 2".
+           display " a= " a
+           stop run.

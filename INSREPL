@@ -1,0 +1,38 @@
+        ID DIVISION.
+        PROGRAM-ID. INSPCONV.
+        DATA DIVISION.
+        WORKING-STORAGE SECTION.
+        01 SRC  PIC X(20) VALUE "ABabABbrr1234Abababc".
+        77 cntr pic 99    value 0.
+        PROCEDURE DIVISION.
+        000-MAIN-PARA.
+           move 'abababbcabbcacbaabba' to src
+           DISPLAY "BEFORE replacing : " SRC
+           INSPECT SRC replacing all "ab" by "12".
+           DISPLAY "AFTER replacing  : " SRC
+      **************************************************************
+           move 'abababbcabbcacbaabba' to src
+           DISPLAY "BEFORE replacing : " SRC
+           INSPECT SRC replacing all "ab" by "12" after initial "a".
+           DISPLAY "AFTER replacing  : " SRC
+      **************************************************************
+           move 'ABabABbrr1234Abababc' to src
+           DISPLAY "BEFORE replacing : " SRC
+           INSPECT SRC tallying cntr for all "a" after initial "AB"
+                       replacing all "b" by "2" before initial "bc"
+           DISPLAY "AFTER replacing  : " SRC
+           display " cntr : " cntr
+      **************************************************************
+           initialize cntr
+           move 'abababbcabbcacbaabba' to src
+           DISPLAY "BEFORE replacing : " SRC
+           INSPECT SRC tallying cntr for all "a" after initial "AB"
+                       replacing all "b" by "2" before initial "bc"
+           DISPLAY "AFTER replacing  : " SRC
+           display " cntr : " cntr
+      **************************************************************
+           move 'abababbcabbcacbaabba' to src
+           DISPLAY "BEFORE replacing : " SRC
+           INSPECT SRC converting 'ab' to '12'
+           DISPLAY "AFTER converting : " SRC
+           STOP RUN.

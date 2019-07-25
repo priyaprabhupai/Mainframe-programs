@@ -1,0 +1,13 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. MAINPGM.                                             00020008
+       DATA DIVISION.                                                   00030000
+       WORKING-STORAGE SECTION.                                         00040000
+       01 GRP1.                                                         00050000
+          02 VAR1 PIC 99 VALUE 10.                                      00060008
+          02 VAR2 PIC 99 VALUE 20.                                      00070008
+       PROCEDURE DIVISION.                                              00090000
+            CALL 'SUBPGM' USING BY CONTENT VAR1,VAR2.                   00091010
+            DISPLAY VAR1                                                00102002
+            DISPLAY VAR2                                                00103002
+                                                                        00104002
+            STOP RUN.                                                   00110001

@@ -1,0 +1,15 @@
+       ID DIVISION.
+       PROGRAM-ID. SUBCORR.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 VAR1.
+          05 A  PIC 99 VALUE 10.
+          05 B  PIC 99 VALUE 5.
+       01 VAR2.
+          05 A  PIC 99 VALUE 50.
+          05 B  PIC 99 VALUE 25.
+       PROCEDURE DIVISION.
+      *    SUBTRACT CORR VAR1 FROM VAR2
+           SUBTRACT A OF VAR1 FROM A OF VAR2, B OF VAR2
+           DISPLAY VAR2
+           STOP RUN.

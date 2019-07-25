@@ -1,0 +1,36 @@
+        ID DIVISION.
+        PROGRAM-ID. INTRINFN.
+        DATA DIVISION.
+        WORKING-STORAGE SECTION.
+        01 VARS.
+           05 C-DATE PIC 9(8).
+           05 ALPH   PIC X(10) VALUE "PRIYA".
+        01 TBL.
+           05 MRKS   PIC 99 OCCURS 5 TIMES.
+        77 MAXI      PIC 99 VALUE 10.
+        77 NUM-EDI   PIC +99.99.
+        77 NUM-EDC   PIC +99,99.
+        77 NUMER     PIC S99V99 VALUE 12.34.
+        PROCEDURE DIVISION.
+        000-MAIN-PARA.
+      *     DISPLAY "CURRENT DATE " FUNCTION CURRENT-DATE(9:6)
+      *     DISPLAY "LOWER CASE   " FUNCTION LOWER-CASE(ALPH)
+      *     DISPLAY "REVERSE      " FUNCTION REVERSE(ALPH)
+            MOVE "1234147687" TO TBL.
+      *     IF FUNCTION LENGTH(ALPH) = MAXI
+      *        DISPLAY "IF WORKS"
+      *     END-IF
+      *     MOVE FUNCTION LENGTH(ALPH) TO MAXI
+      *     DISPLAY "MAXI " MAXI
+      *     COMPUTE MAXI = FUNCTION LENGTH(ALPH)
+      *     DISPLAY "MAXI " MAXI
+            COMPUTE MAXI = FUNCTION MAX(MRKS(1),MRKS(2),MRKS(3))
+            DISPLAY "MAXI : " MAXI
+            MOVE 23.12 TO NUM-EDI
+      *     IF NUM-EDI > NUMER
+            IF FUNCTION NUMVAL(NUM-EDI) > NUMER
+              DISPLAY "NUM-EDI" NUM-EDI.
+      *     MOVE 2156 TO NUM-EDC
+      *     IF FUNCTION NUMVAL-C(NUM-EDC)>NUMER
+      *       DISPLAY "NUM-EDC" NUM-EDC.
+            STOP RUN.

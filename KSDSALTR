@@ -1,0 +1,52 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. RDKSAIX.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT INFILE ASSIGN TO DD1
+           ORGANIZATION IS INDEXED
+           ACCESS MODE IS RANDOM
+           RECORD KEY IS ENO
+           ALTERNATE RECORD KEY IS ENAME WITH DUPLICATES
+           FILE STATUS IS FS1.
+       DATA DIVISION.
+       FILE SECTION.
+       FD INFILE.
+       01 EMPREC.
+          02 ENO    PIC X(4).
+          02        PIC X(1).
+          02 ENAME  PIC X(10).
+          02 FILLER PIC X.
+          02 DNO    PIC X(3).
+          02        PIC X(61).
+       WORKING-STORAGE SECTION.
+       77 FS1    PIC 99.
+       PROCEDURE DIVISION.
+       OPEN-PARA.
+            MOVE LOW-VALUES TO EMPREC.
+            DISPLAY "WELCOME TO FILE PROGRAMMING".
+            OPEN I-O INFILE
+            DISPLAY " OPEN FILE STATUS : " FS1.
+            MOVE 12 TO ENO
+            MOVE 'MANOJ' TO ENAME
+            MOVE 'D1' TO DNO
+            WRITE EMPREC
+            DISPLAY " WRIT FILE STATUS : " FS1.
+            CLOSE INFILE
+            OPEN INPUT INFILE.
+            DISPLAY " OPEN FILE STATUS : " FS1.
+            ACCEPT ENAME.
+       READ-PARA.
+            READ INFILE RECORD KEY IS ENAME
+               INVALID KEY PERFORM CLOSE-PARA
+            END-READ.
+            IF FS1 = 0 THEN
+               DISPLAY " EMPLOYEE NO   : " ENO
+               DISPLAY " EMPLOYEE NAME : " ENAME
+               DISPLAY " DEPARTMENT    : " DNO                          AY " ---
+            ELSE
+               DISPLAY "RECORD READ ERROR : " FS1
+            END-IF.
+       CLOSE-PARA.
+            CLOSE INFILE.
+            STOP RUN.

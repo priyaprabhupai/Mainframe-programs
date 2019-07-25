@@ -1,0 +1,12 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. SUBPGM.                                              00020000
+       DATA DIVISION.                                                   00030000
+       LINKAGE SECTION.                                                 00040000
+       01 VAR1.                                                         00050000
+          05 VAR-TXT PIC X(10).                                         00061000
+       PROCEDURE DIVISION USING VAR1.                                   00062000
+            DISPLAY "IN SUBPGM2 "                                       00062100
+            DISPLAY "VALUE PASSED " VAR-TXT.                            00063000
+            MOVE "BY" TO VAR1                                           00063103
+            DISPLAY "LEAVING SUBPGM2"                                   00063202
+            EXIT PROGRAM.                                               00064001

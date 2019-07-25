@@ -1,0 +1,133 @@
+Defining Pointers
+
+You can define pointers in two ways:
+
+A pointer to a data item. This pointer is defined with the USAGE POINTER clause.
+A pointer to an ILE COBOL program, an ILE procedure, or a program object. This p
+On the AS/400 system, pointers are 16 bytes long.
+
+ILE COBOL pointer data items point to system space objects. One part of the poin
+
+ILE COBOL procedure-pointer data items are AS/400 open pointers. Open pointers h
+
+A pointer a 16-byte elementary item that can be compared for equality, or used t
+
+A pointer data item can be used only in:
+
+A SET statement (Formats 5 and 7 only)
+A relation condition
+The USING phrase of a CALL statement, or the Procedure Division header
+The operand for the LENGTH OF and ADDRESS OF special registers.
+A procedure-pointer data item can be used only in:
+
+A SET statement (Format 6 only)
+A relation condition
+The USING phrase of a CALL statement, or the Procedure Division header
+The operand for the LENGTH OF and ADDRESS OF special registers
+The CALL statement as a target.
+If pointers are used in a relational condition, the only valid operators are equ
+
+Because pointer data items are not simply binary numbers on the AS/400 system, m
+
+Pointer data items are defined explicitly with the USAGE IS POINTER clause, and
+
+If a group item is described with the USAGE IS POINTER clause, the elementary it
+
+Pointers can be part of a group that is referred to in a MOVE statement or an in
+
+Using ILE C and other languages, you can declare pointers to teraspace memory. I
+
+(C) Copyright IBM Corporation 1992, 2006. All Rights Reserve
+Pointer Alignment
+
+Pointers can be defined at any level (except 88) in the File, Working-Storage, o
+
+When a pointer is referenced on the iSeries server, it must be on a 16-byte stor
+
+In the File and Working-Storage sections, the compiler ensures that this excepti
+
+You can define a data item as a pointer by specifying the USAGE IS POINTER claus
+
+ ID DIVISION.
+ PROGRAM-ID. PROGA.
+ WORKING-STORAGE SECTION.
+  77  APTR USAGE POINTER.
+  77  APROC-PTR USAGE PROCEDURE-POINTER.
+  01  AB.
+      05 BPTR  USAGE POINTER.
+      05 BVAR  PIC S9(3) PACKED-DECIMAL.
+ LINKAGE SECTION.
+ 01  AVAR.
+     05 CVAR  PIC X(30).
+ PROCEDURE DIVISION.
+      SET APTR TO ADDRESS OF AVAR.
+      SET APROC-PTR TO ENTRY "PROGA".
+In the above example, AVAR is an 01-level data item, so the ADDRESS OF AVAR is t
+
+In the above example, if the SET statement used ADDRESS OF CVAR, no special regi
+
+In the above example, the second SET statement is setting procedure-pointer data
+
+Reference > Rational Developer for Power Systems Software > Language reference >
+Redefining Pointers
+
+A pointer data item or procedure-pointer data item may be the subject or object
+
+When a pointer is the subject of a REDEFINES clause, the object data item must b
+
+ WORKING-STORAGE SECTION.
+  01  AB.
+      05 ALPHA-NUM PIC X(16).
+      05 APTR REDEFINES ALPHA-NUM USAGE POINTER.
+      05 BPTR  USAGE POINTER.
+      05 CPTR REDEFINES BPTR USAGE POINTER.
+In the above example, both APTR and CPTR are pointer data items that redefine 16
+
+ WORKING-STORAGE SECTION.
+  01  EF.
+      05 ALPHA-NUM PIC X(5).
+      05 HI.
+         10 ALPHA-NUM-TWO PIC X(11).
+         10 APTR  USAGE POINTER.
+      05 BPTR REDEFINES HI USAGE POINTER.
+In the above example, APTR is aligned on a 16-byte boundary. That is, the ILE CO
+
+In the following example, similar to the above, the ILE COBOL compiler is able t
+
+ WORKING-STORAGE SECTION.
+  01  EF.
+      05 ALPHA-NUM PIC X(5).
+      05 HI.
+         10 ALPHA-NUM-TWO PIC X(11).
+         10 APTR  USAGE POINTER.
+         10 ALPHA-NUM-THREE PIC X(5).
+      05 KL REDEFINES HI.
+         10 BPTR USAGE POINTER.
+In the above example, group item KL is not on a 16-byte boundary; however, the c
+
+(C) Copyright IBM Corporation 1992, 2006. All Rights Reserved.
+
+Reference > Rational Developer for Power Systems Software > Language reference >
+Initializing Pointers Using the NULL Figurative Constant
+
+The NULL figurative constant represents a value used to indicate that data items
+
+ WORKING-STORAGE SECTION.
+  77 APTR  USAGE POINTER VALUE NULL.
+proROCEDURE DIVISION.
+     IF APTR = NULL THEN
+        DISPLAY 'APTR IS NULL'
+     END-IF.
+In the above example, pointer APTR is set to NULL in the Working-Storage section
+
+On the AS/400 system, the initial value of a pointer data item or procedure-poin
+
+(C) Copyright IBM Corporation 1992, 2006. All Rights Reserved.
+Reference > Rational Developer for Power Systems Software > Language reference >
+Reading and Writing Pointers
+
+Pointers can be defined in the File Section, and can be set and used as can any
+
+If a file has blocking in effect, only the first record of a block is guaranteed
+A record containing pointers can be written to a file; however, on subsequent re
+(C) Copyright IBM Corporation 1992, 2006. All Rights Reserved.

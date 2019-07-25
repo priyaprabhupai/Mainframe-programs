@@ -1,0 +1,45 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. READES.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT INFILE ASSIGN TO AS-DD1
+           ORGANIZATION IS SEQUENTIAL
+           ACCESS MODE IS SEQUENTIAL
+           FILE STATUS IS FS1.
+       DATA DIVISION.
+       FILE SECTION.
+       FD INFILE.
+       01 EMPREC.
+          02 FS-ID     PIC 99.
+          02 FS-NAME   PIC A(10).
+          02 FS-LOC    PIC X(3).
+          02           PIC X(5).
+        WORKING-STORAGE SECTION.
+       77 FS1    PIC 99.
+       77 WS-NAME PIC A(10).
+       PROCEDURE DIVISION.
+       OPEN-PARA.
+            DISPLAY "WELCOME TO FILE PROGRAMMING".
+            OPEN I-O INFILE.
+            DISPLAY " OPEN FILE STATUS : " FS1.
+       READ-PARA.
+            ACCEPT WS-NAME
+            PERFORM UNTIL FS1 NOT = 0
+               READ INFILE
+               AT END
+                  DISPLAY "END OF FILE REACHED"
+               NOT AT END
+                  DISPLAY " EMPLOYEE NO   : " FS-ID
+                  DISPLAY " EMPLOYEE NAME : " FS-NAME
+                  DISPLAY " DEPARTMENT    : " FS-LOC
+                  IF FS-ID = 20
+                     MOVE WS-NAME TO FS-NAME
+                     REWRITE EMPREC
+                     DISPLAY "RECORD REWRITTEN : " EMPREC "FS " FS1
+                  END-IF
+               END-READ
+            END-PERFORM.
+       CLOSE-PARA.
+            CLOSE INFILE.
+            STOP RUN.

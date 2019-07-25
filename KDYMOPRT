@@ -1,0 +1,41 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. KDYMOPRT.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT EMPFILE ASSIGN TO DD1
+           ORGANIZATION IS INDEXED
+           ACCESS MODE IS DYNAMIC
+           RECORD KEY IS ENO
+           FILE STATUS IS FS1.
+       DATA DIVISION.
+       FILE SECTION.
+       FD EMPFILE.
+       01 EMPREC.
+          02 ENO    PIC X(3).
+          02        PIC X(1).
+          02 ENAME  PIC A(10).
+          02 FILLER PIC X.
+          02 DNO    PIC XX.
+          02 FILLER PIC X(63).
+       WORKING-STORAGE SECTION.
+       77 FS1 PIC 99.
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+            ACCEPT ENO.
+            OPEN INPUT EMPFILE.
+            DISPLAY "OPEN STATUS " FS1
+            PERFORM START-PARA.
+            PERFORM READ-PARA UNTIL FS1 NOT = 0
+            CLOSE EMPFILE.
+            STOP RUN.
+         START-PARA.
+            START EMPFILE KEY = ENO
+               INVALID KEY DISPLAY "KEY IS INVALID"
+               NOT INVALID KEY DISPLAY "KEY IS VALID"
+            END-START.
+         READ-PARA.
+            READ EMPFILE NEXT RECORD
+              AT END DISPLAY "END OF FILE"
+              NOT AT END DISPLAY "RECORD READ " EMPREC
+            END-READ.

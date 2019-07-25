@@ -1,0 +1,14 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. MAINPGM.                                             00020000
+       DATA DIVISION.                                                   00030000
+       WORKING-STORAGE SECTION.                                         00040000
+       01 GRP1.                                                         00050000
+          02 VAR1 PIC X(10) VALUE "MAINFRAME".                          00060004
+          02 VAR2 PIC X(10) VALUE "TIGER".                              00070006
+       01 PGM-NAME PIC X(6) VALUE "SUBPGM".                             00080000
+       PROCEDURE DIVISION.                                              00090000
+            DISPLAY "STARTING MAIN: " VAR1 " AND " VAR2                 00091006
+            CALL PGM-NAME USING BY CONTENT VAR1 , VAR2                  00100008
+            DISPLAY "BACK IN MAIN : " VAR1 " AND " VAR2                 00101006
+                                                                        00103000
+            STOP RUN.                                                   00104000

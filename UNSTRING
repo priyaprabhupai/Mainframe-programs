@@ -1,0 +1,24 @@
+        ID DIVISION.                                                    00010001
+        PROGRAM-ID. SELSQL.                                             00020001
+        DATA DIVISION.                                                  00030001
+        WORKING-STORAGE SECTION.                                        00030102
+        EXEC SQL                                                        00031001
+           INCLUDE EMP                                                  00040001
+        END-EXEC.                                                       00041004
+        EXEC SQL                                                        00042001
+           INCLUDE SQLCA                                                00042101
+        END-EXEC.                                                       00043004
+        PROCEDURE DIVISION.                                             00050001
+        000-MAIN-PARA.                                                  00060003
+           MOVE 89 TO WS-EMPNO.                                         00060113
+           EXEC SQL                                                     00061001
+              SELECT EMPNAME INTO :WS-EMPNAME                           00062013
+                  FROM FSS087.EMP_TAB WHERE EMPNO = :WS-EMPNO           00063013
+           END-EXEC.                                                    00070003
+           IF SQLCODE = 0                                               00070114
+                DISPLAY "NAME : " WS-EMPNAME                            00071014
+           ELSE                                                         00072014
+                DISPLAY "SQL ERR : " SQLCODE                            00073014
+           END-IF                                                       00074014
+           STOP RUN.                                                    00080001
+

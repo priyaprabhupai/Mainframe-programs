@@ -1,0 +1,14 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. SUBPGM.                                              00020000
+       DATA DIVISION.                                                   00030000
+       WORKING-STORAGE SECTION.                                         00031003
+       01 GRP1.                                                         00032003
+          05 ELE1 PIC XX VALUE "HI".                                    00033003
+       LINKAGE SECTION.                                                 00040000
+       01 LK-VAR.                                                       00050013
+          05 LK-LEN PIC S9(4) COMP.                                     00060013
+          05 LK-TXT PIC X(20).                                          00061013
+       PROCEDURE DIVISION USING LK-VAR.                                 00070013
+            DISPLAY "IN SUBPGM"                                         00071003
+            DISPLAY "MY NAME IS " LK-TXT                                00071113
+            GOBACK.                                                     00100013

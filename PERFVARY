@@ -1,0 +1,14 @@
+       ID DIVISION.
+       PROGRAM-ID. PERFVARY.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       77 I PIC 99.
+       77 J PIC 99.
+       77 PROD PIC 999.
+       PROCEDURE DIVISION.
+           PERFORM PARA1 VARYING I FROM 1 BY 2 UNTIL I > 9
+                         AFTER   J FROM 1 BY 1 UNTIL J > 10
+           STOP RUN.
+       PARA1.
+           COMPUTE PROD = I * J
+           DISPLAY "I " I " * J " J " = " PROD.

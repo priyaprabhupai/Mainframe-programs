@@ -1,0 +1,63 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. KSDSWRTE.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT EMPFILE ASSIGN TO DD1
+           ORGANIZATION IS INDEXED
+           ACCESS MODE IS RANDOM
+           RECORD KEY IS ENO
+           FILE STATUS IS FS1.
+       DATA DIVISION.
+       FILE SECTION.
+       FD EMPFILE.
+       01 EMPREC.
+          02 ENO    PIC X(3).
+          02        PIC X(1).
+          02 ENAME  PIC A(10).
+          02 FILLER PIC X.
+          02 DNO    PIC XX.
+          02 FILLER PIC X(63).
+       WORKING-STORAGE SECTION.
+       77 FS1 PIC XX.
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+            OPEN I-O EMPFILE.
+            DISPLAY "FILE STATUS " FS1
+            PERFORM WRITE-PARA
+            PERFORM READ-PARA.
+            PERFORM REWRITE-PARA
+            PERFORM DELETE-PARA.
+            CLOSE EMPFILE.
+            STOP RUN.
+         WRITE-PARA.
+            ACCEPT ENO.
+            ACCEPT ENAME.
+            ACCEPT DNO.
+            WRITE EMPREC.
+            IF FS1 = 00
+               DISPLAY "WRITE SUCCESS"
+            ELSE
+               DISPLAY "ERROR" FS1
+            END-IF.
+         READ-PARA.
+            MOVE 100 TO ENO
+            READ EMPFILE
+              KEY IS ENO
+              INVALID KEY DISPLAY "KEY IS INVALID"
+              NOT INVALID KEY DISPLAY "RECORD READ " EMPREC
+            END-READ.
+            DISPLAY "READ STATUS " FS1.
+         REWRITE-PARA.
+            ACCEPT ENAME
+            ACCEPT DNO
+            REWRITE EMPREC
+              INVALID KEY DISPLAY "KEY IS INVALID"
+              NOT INVALID KEY DISPLAY "REWRITE SUCCESS " EMPREC
+            END-REWRITE.
+         DELETE-PARA.
+            DELETE EMPFILE RECORD
+              INVALID KEY DISPLAY "KEY IS NOT PRESENT"
+              NOT INVALID KEY DISPLAY "DELETE SUCCESS"
+            END-DELETE.
+            PERFORM READ-PARA.

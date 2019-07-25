@@ -1,0 +1,12 @@
+        id division.
+        program-id. q7.
+        data division.
+        working-storage section.
+        77 i pic 99 value 2.
+        procedure division.
+            move 10 to i
+            perform para1 varying i from 1 by 1 until i > 10
+            stop run.
+        para1.
+            move 5 to i
+            display 'i=' i.

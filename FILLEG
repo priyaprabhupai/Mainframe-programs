@@ -1,0 +1,28 @@
+        ID DIVISION.
+        PROGRAM-ID. FILLEG.
+        DATA DIVISION.
+        WORKING-STORAGE SECTION.
+        01 MAST-RPT.
+           05 WS-ID   PIC 99    VALUE 34.
+           05 FILLER  PIC X(10) VALUE SPACES.
+           05 WS-NAME PIC A(10) VALUE 'PRIYA PRAB'.
+           05         PIC X(10) VALUE ALL '*'.
+           05 WS-LOC  PIC X(10) VALUE 'BANGALOR'.
+
+        01 TRANS-RPT.
+           05 WS-ID   PIC 99    VALUE 50.
+           05 FILLER  PIC X(10) VALUE ALL '%'.
+           05 WS-NAME PIC A(10) VALUE 'KARTHIK'.
+           05         PIC X(10) VALUE ALL '#'.
+           05 WS-LOC  PIC X(10) VALUE 'HYDERABD'.
+        PROCEDURE DIVISION.
+        A100-MAINPARA.
+           DISPLAY MAST-RPT.
+           DISPLAY TRANS-RPT.
+           INITIALIZE TRANS-RPT
+           DISPLAY "AFTER INITILIAZE:" TRANS-RPT
+           MOVE CORRESPONDING MAST-RPT TO TRANS-RPT
+           DISPLAY "AFTER MOVE CORR:" TRANS-RPT
+           MOVE '&&&&&&&&&&' TO MAST-RPT(3:10)
+           DISPLAY "REF MODIFICATION:" MAST-RPT
+           STOP RUN.

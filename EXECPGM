@@ -1,0 +1,11 @@
+//OZA101E JOB ,,NOTIFY=&SYSUID                                          00010092
+//STEP1 EXEC PGM=Q9 REPL                                                00020099
+//STEPLIB DD DSN=OZA101.COBOL.LOADLIB,DISP=SHR                          00030005
+//DD1     DD DSN=OZA101.VSAM.COBKSDS,DISP=SHR                           00030199
+//SYSIN DD DATA                                                         00031099
+101                                                                     00032099
+GAURAV                                                                  00033099
+D1                                                                      00033199
+GAYATRI                                                                 00033299
+D2                                                                      00033399
+/*                                                                      00034099

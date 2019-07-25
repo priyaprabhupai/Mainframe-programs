@@ -1,0 +1,28 @@
+        ID DIVISION.                                                    00010000
+        PROGRAM-ID. STREG.                                              00020000
+        DATA DIVISION.                                                  00030000
+        WORKING-STORAGE SECTION.                                        00040000
+         01 STR1 PIC X(25) VALUE 'AACDXABYCDXABCDYABCDY'.               00050013
+         01 CNTR PIC 99 VALUE 0.                                        00060008
+        PROCEDURE DIVISION.                                             00070000
+             INSPECT STR1 TALLYING CNTR FOR ALL 'A' BEFORE INITIAL 'Y'. 00080013
+             DISPLAY "STR" CNTR.                                        00090008
+      * COUNT CHARS BEFORE FIRST A                                      00091007
+                   INITIALIZE CNTR                                      00091109
+                                                                        00092005
+            INSPECT STR1 TALLYING CNTR FOR CHARACTERS BEFORE INITIAL "A"00093010
+             DISPLAY "BEFORE A" CNTR                                    00094005
+                   INITIALIZE CNTR                                      00095005
+      * COUNT ALL A                                                     00096007
+              INSPECT STR1 TALLYING CNTR FOR ALL 'A'                    00097011
+             DISPLAY "ALL A" CNTR                                       00098005
+                   INITIALIZE CNTR                                      00099005
+      * COUNT ALL A AFTER INITIAL B                                     00099107
+                INSPECT STR1 TALLYING CNTR FOR ALL 'A' AFTER INITIAL 'B'00099210
+                   DISPLAY "ALL A AFTER INITIAL B" CNTR                 00099305
+             INITIALIZE CNTR                                            00099405
+      * COUNT LEADING CHARS                                             00099507
+                                                                        00099605
+             INSPECT STR1 TALLYING CNTR FOR LEADING 'A'                 00099710
+             DISPLAY "LEADING A" CNTR                                   00100005
+             STOP RUN.                                                  00110005

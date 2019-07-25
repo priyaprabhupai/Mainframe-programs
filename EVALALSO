@@ -1,0 +1,27 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. EVALTE.
+       ENVIRONMENT DIVISION.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       77 NAME    PIC A(10).
+       77 AGE     PIC 9(2).
+       PROCEDURE DIVISION.
+       INPUT-PARA.
+            ACCEPT NAME.
+            ACCEPT AGE.
+       PROCESS-PARA.
+           EVALUATE TRUE ALSO TRUE
+             WHEN (AGE > 0) ALSO (AGE <= 03)
+               DISPLAY  NAME " IS " AGE " YEAR OLD : INFANT "
+             WHEN (AGE > 3) ALSO (AGE <= 12)
+               DISPLAY  NAME " IS " AGE " YEAR OLD : CHILD "
+             WHEN (AGE > 12) ALSO (AGE <= 19)
+               DISPLAY  NAME " IS " AGE " YEAR OLD : TEEN "
+             WHEN (AGE > 19) ALSO (AGE <= 40)
+               DISPLAY  NAME " IS " AGE " YEAR OLD : ADULT "
+             WHEN (AGE > 60) ALSO (AGE <= 99)
+               DISPLAY  NAME " IS " AGE " YEAR OLD : SENIOR "
+             WHEN OTHER
+               DISPLAY " SORRY INVALID AGE ENTERD "
+            END-EVALUATE.
+            STOP RUN.

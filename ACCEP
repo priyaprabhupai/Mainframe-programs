@@ -1,0 +1,10 @@
+        id division.
+        program-id. accep.
+        data division.
+        working-storage section.
+        77 ws-date pic x(10).
+        procedure division.
+        a100-mainpara.
+             accept ws-date from date.
+             display ws-date
+             stop run.

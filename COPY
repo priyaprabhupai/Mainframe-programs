@@ -1,0 +1,16 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. DECLRN.
+       ENVIRONMENT DIVISION.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+            COPY DECL.
+       PROCEDURE DIVISION.
+       INPUT-PARA.
+            MOVE "E001" TO ENUM.
+            MOVE "CHRIS" TO ENAME.
+            MOVE "AGAPN7867" TO PANNO.
+       OUTPUT-PARA.
+            DISPLAY "ENO  IS " ENUM.
+            DISPLAY "NAME IS " ENAME.
+            DISPLAY "PANNO IS " PANNO.
+            STOP RUN.
