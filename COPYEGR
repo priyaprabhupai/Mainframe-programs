@@ -2,24 +2,25 @@
        PROGRAM-ID. COPYEG.                                              00020000
        DATA DIVISION.                                                   00030000
        WORKING-STORAGE SECTION.                                         00040000
-              COPY CPYBOOK.                                             00050025
-      *       COPY CPYBOOK REPLACING ==:WS-:== BY ==FS-==               00050126
-      *                              X(5) BY X(3).                      00051026
-      *       COPY CPYBOOK.                                             00051126
-      *       COPY CPYBOOK REPLACING ABC BY XYZ.                        00051227
-      *       COPY CPYBOOK REPLACING "WS-NUM" BY "FS-NUM".              00051328
-      *       COPY CPYBOOK REPLACING WS-NUM BY FS-NUM.                  00051428
-      *       COPY CPYBOOK REPLACING WS-NUM BY FS-NUMR.                 00051528
-              COPY CPYBOOK REPLACING ==V99== BY ====                    00051628
-                                     ==R== BY ==4==.                    00051728
-              COPY CPYBOOK REPLACING ==P== BY ==PQR==.                  00051828
-      *       COPY CPYBOOK REPLACING P BY == BUT PIC IS NOT ==.         00051926
-      *       COPY CPYBOOK REPLACING X(5) BY X(THREE).                  00052026
-      *        COPY CPYBOOK REPLACING ( BY &                            00052126
-      *                              ) BY @.                            00052226
-      *COPY COPYBK1 REPLACING A BY VAR1                                 00052326
-      *                       B BY VAR2                                 00052426
-      *                       C BY VAR3.                                00052526
-       PROCEDURE DIVISION.                                              00052618
-            DISPLAY WS-REC1.                                            00053022
+              COPY COPYMEM REPLACING ==:WS-:== BY ==FS-==               00050102
+                                     ==V99== BY ====                    00050202
+                                     ==R== BY ==4==                     00050302
+                                     ==P== BY ==PQR==.                  00050402
+      *       COPY COPYMEM.                                             00051100
+      *       COPY COPYMEM REPLACING ABC BY XYZ.                        00051200
+      *       COPY COPYMEM REPLACING "WS-NUM" BY "FS-NUM".              00051300
+      *       COPY COPYMEM REPLACING WS-NUM BY FS-NUM.                  00051400
+      *       COPY COPYMEM REPLACING WS-NUM BY FS-NUMR.                 00051500
+              COPY COPYMEM REPLACING ==V99== BY ====                    00051600
+                                     ==R== BY ==4==.                    00051700
+              COPY COPYMEM REPLACING ==P== BY ==PQR==.                  00051800
+      *       COPY COPYMEM REPLACING P BY == BUT PIC IS NOT ==.         00051900
+      *       COPY COPYMEM REPLACING X(5) BY X(THREE).                  00052000
+      *        COPY COPYMEM REPLACING ( BY &                            00052100
+      *                              ) BY @.                            00052200
+      *COPY COPYBK1 REPLACING A BY VAR1                                 00052300
+      *                       B BY VAR2                                 00052400
+      *                       C BY VAR3.                                00052500
+       PROCEDURE DIVISION.                                              00052600
+            DISPLAY WS-REC1.                                            00053000
             STOP RUN.                                                   00054000

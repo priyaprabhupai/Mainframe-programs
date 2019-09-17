@@ -5,13 +5,15 @@
        WORKING-STORAGE SECTION.
        77 NAME    PIC A(10).
        77 AGE     PIC 9(2).
+          88 INFANT VALUE 0 THRU 4.
+          88 CHILD  VALUE 4 THRU 10.
        PROCEDURE DIVISION.
        INPUT-PARA.
             ACCEPT NAME.
             ACCEPT AGE.
        PROCESS-PARA.
            EVALUATE TRUE ALSO TRUE
-             WHEN (AGE > 0) ALSO (AGE <= 03)
+             WHEN INFANT    ALSO CHILD
                DISPLAY  NAME " IS " AGE " YEAR OLD : INFANT "
              WHEN (AGE > 3) ALSO (AGE <= 12)
                DISPLAY  NAME " IS " AGE " YEAR OLD : CHILD "

@@ -6,7 +6,7 @@
        77 NAME    PIC A(10).
        01 AGE     PIC 9(2).
             88 INFANT   VALUE 0 THRU 4.
-            88 CHILD    VALUE 4 THRU 12.
+            88 CHILD    VALUE 4 THRU 15.
             88 TEEN     VALUE 13 THRU 19.
             88 ADULT    VALUE 20 THRU 60.
             88 SENIOR   VALUE 60 THRU 99.
@@ -16,12 +16,12 @@
        PROCESS-PARA.
            SET TEEN TO TRUE
            DISPLAY "YOUR AGE IS=" AGE.
-            ACCEPT AGE.
+           ACCEPT AGE.
            EVALUATE TRUE
-             WHEN INFANT                                                AY  NAME
-              DISPLAY  NAME " IS " AGE " YEAR OLD : INFANT"
             WHEN CHILD
               DISPLAY  NAME " IS " AGE " YEAR OLD : CHILD "
+             WHEN INFANT                                                AY  NAME
+              DISPLAY  NAME " IS " AGE " YEAR OLD : INFANT"
             WHEN TEEN
               DISPLAY  NAME " IS " AGE " YEAR OLD : TEEN "
             WHEN ADULT

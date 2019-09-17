@@ -1,0 +1,32 @@
+      **************************************************************    00010000
+      * PROGRAM TO FIND THE AVERAGE OF N STUDENTS                  *    00020000
+      **************************************************************    00030000
+       ID DIVISION.                                                     00040000
+       PROGRAM-ID. AVGOFN.                                              00050000
+      *                                                                 00060000
+       DATA DIVISION.                                                   00070000
+       WORKING-STORAGE SECTION.                                         00080000
+       77 N     PIC 99.                                                 00081000
+       77 MARK1 PIC 99.                                                 00090000
+       77 MARK2 PIC 99.                                                 00100000
+       77 MARK3 PIC 99.                                                 00110000
+       77 AVG   PIC 99.99.                                              00120000
+       PROCEDURE DIVISION.                                              00130000
+           ACCEPT N                                                     00131000
+           PERFORM N TIMES                                              00132000
+              ACCEPT MARK1                                              00140000
+              ACCEPT MARK2                                              00150000
+              ACCEPT MARK3                                              00160000
+              COMPUTE AVG = (MARK1 + MARK2 + MARK3) / 3                 00170000
+              DISPLAY 'AVERAGE IS ' AVG                                 00180000
+              IF AVG >= 70 THEN                                         00190000
+                 DISPLAY "DISTINCTION"                                  00200000
+              ELSE                                                      00210000
+                 IF AVG >=50                                            00211000
+                    DISPLAY "QUALIFIED"                                 00212000
+                 ELSE                                                   00213000
+                    DISPLAY "NOT QUALIFIED"                             00220000
+                 END-IF                                                 00221000
+              END-IF                                                    00230000
+           END-PERFORM                                                  00240000
+           STOP RUN.                                                    00250000

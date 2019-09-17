@@ -1,0 +1,37 @@
+       IDENTIFICATION      DIVISION.
+       PROGRAM-ID.         DELKSDS.
+       ENVIRONMENT         DIVISION.
+       INPUT-OUTPUT        SECTION.
+       FILE-CONTROL.
+           SELECT STUDFILE ASSIGN TO DD1
+           ORGANIZATION IS INDEXED
+           ACCESS MODE IS RANDOM
+           RECORD KEY IS FS-ID
+           FILE STATUS IS FS1.
+       DATA                DIVISION.
+       FILE                SECTION.
+       FD STUDFILE.
+       01 STUDREC.
+          02 FS-ID     PIC X(3).
+          02 FS-NAME   PIC A(10).
+          02 FS-SAL    PIC 9(5).
+          02 FILLER    PIC X(62).
+       WORKING-STORAGE     SECTION.
+       77 FS1 PIC XX.
+       PROCEDURE           DIVISION.
+       MAIN-PARA.
+            OPEN I-O STUDFILE.
+            IF FS1 = 00
+               PERFORM DELETE-PARA
+               CLOSE STUDFILE
+            ELSE
+               DISPLAY "OPEN FILE STATUS " FS1
+            END-IF
+            STOP RUN.
+       DELETE-PARA.
+            ACCEPT FS-ID
+            DELETE  STUDFILE RECORD
+              INVALID KEY DISPLAY "KEY NOT FOUND "
+              NOT INVALID KEY DISPLAY "RECORD DELETED "
+            END-DELETE
+            DISPLAY "DELETE STATUS " FS1.

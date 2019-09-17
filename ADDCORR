@@ -2,21 +2,16 @@
        PROGRAM-ID. ADDCORR.                                             00020000
        DATA DIVISION.                                                   00030000
        WORKING-STORAGE SECTION.                                         00040000
-       01 GRP1.                                                         00050010
-          05 ELE1 PIC 99V99 VALUE 81.11.                                00060010
-          05 ELE2 PIC 99V99 VALUE 22.22.                                00070008
-          05 ELE3 PIC 99V99 VALUE 33.33.                                00080008
-       01 GRP2.                                                         00090010
-          05 ELE1 PIC 99V99 VALUE 82.66.                                00100009
-          05 ELE2 PIC 99V99 VALUE 67.66.                                00110009
-          05 ELE3 PIC 99V99 VALUE 78.66.                                00120009
+       01 GRP1.                                                         00050000
+          05 ELEA   PIC A(10) VALUE 'MAGICAL W'.                        00060002
+          05 ELEX   PIC X(10) VALUE '123ABC'.                           00061002
+          05 ELEB   PIC 99V99 VALUE 22.22.                              00070002
+          05 FILLER PIC X(5) VALUE ALL '*'.                             00080002
        PROCEDURE DIVISION.                                              00130000
-       12ABC.                                                           00130105
-            ADD CORR GRP1 TO GRP2                                       00130210
-            ON SIZE ERROR                                               00130310
-              DISPLAY "DATA INCORRECT"                                  00130410
-            NOT ON SIZE ERROR                                           00130510
-              DISPLAY "81.11 + 82.66" ELE1 OF GRP2                      00130610
-              DISPLAY "22.22 + 67.66" ELE2 OF GRP2                      00130710
-              DISPLAY "33.33 + 78.66" ELE3 OF GRP2.                     00130810
-            STOP RUN.                                                   00170001
+       MAIN-PARA.                                                       00130101
+      * MOVE SPACES TO ALPHA AND ALPHANUMERIC DATA ITEMS                00130202
+      * MOVE ZERO TO NUMERIC DATA ITEMS                                 00130302
+      * LEAVE FILLER UNTOUCHED                                          00130402
+            INITIALIZE GRP1                                             00130702
+            DISPLAY GRP1                                                00130802
+            STOP RUN.                                                   00130902

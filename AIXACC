@@ -1,0 +1,32 @@
+       ID DIVISION.
+       PROGRAM-ID. AIXACC.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+            SELECT INFILE ASSIGN TO DD1
+            ORGANIZATION IS INDEXED
+            ACCESS MODE IS DYNAMIC
+            RECORD KEY IS FS-ID
+            ALTERNATE KEY IS FS-NAME WITH DUPLICATES
+            FILE STATUS IS WS-FS1.
+       DATA DIVISION.
+       FILE SECTION.
+       FD INFILE.
+       01 INREC.
+          05 FS-ID PIC X(3).
+          05 FS-NAME PIC X(9).
+          05         PIC X(68).
+       WORKING-STORAGE SECTION.
+       77 WS-FS1     PIC XX.
+       PROCEDURE DIVISION.
+            OPEN INPUT INFILE
+            DISPLAY 'OPEN STS ' WS-FS1
+            MOVE 'ORANGE' TO FS-NAME
+            READ INFILE
+            KEY IS FS-NAME
+            INVALID KEY  DISPLAY FS-NAME ' IS UNAVAIL'
+            NOT INVALID KEY DISPLAY 'REC: ' INREC
+            END-READ
+
+            CLOSE INFILE
+            STOP RUN.

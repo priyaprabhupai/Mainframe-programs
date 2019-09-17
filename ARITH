@@ -3,27 +3,30 @@
         DATA DIVISION.                                                  00030000
         WORKING-STORAGE SECTION.                                        00040000
         01 VARS.                                                        00050000
-           05 WS-NUM1 PIC 99.                                           00060000
-           05 WS-NUM2 PIC 99.                                           00070000
-           05 WS-RES  PIC 9999.                                         00080002
-           05 WS-REM  PIC 99.                                           00081002
-        PROCEDURE DIVISION.                                             00090000
-        A100-MAINPARA.                                                  00100000
-      ************* ADDITION ******************                         00101000
-           ACCEPT WS-NUM1                                               00110000
-           ACCEPT WS-NUM2                                               00120000
-           ADD WS-NUM1 TO WS-NUM2 GIVING WS-RES                         00130000
-           DISPLAY WS-NUM1 " + " WS-NUM2 " = " WS-RES                   00131000
-      ************* SUBTRACTION ***************                         00140000
-           SUBTRACT WS-NUM2 FROM WS-NUM1 GIVING WS-RES                  00150000
-           DISPLAY WS-NUM1 " - " WS-NUM2 " = " WS-RES                   00160000
-      ************* MULTIPLICATION ************                         00170000
-           MULTIPLY WS-NUM1 BY WS-NUM2 GIVING WS-RES                    00180000
-           DISPLAY WS-NUM1 " * " WS-NUM2 " = " WS-RES                   00190000
-      ************* DIVISION       ************                         00200000
-           DIVIDE WS-NUM1 BY WS-NUM2 GIVING WS-RES REMAINDER WS-REM     00210002
-      *    DIVIDE WS-NUM2 INTO WS-NUM1 GIVING WS-RES                    00211000
-           DISPLAY WS-NUM1 " / " WS-NUM2 " = " WS-RES " REM=" WS-REM    00220002
-      **************COMPUTE STATEMENT ****************                  00221002
-           COMPUTE WS-RES = WS-NUM1 + (WS-NUM2 - WS-NUM3) * WS-NUM4     00222002
-           STOP RUN.                                                    00230000
+           05 WS-NUM1 PIC 99.                                           00060002
+           05 WS-NUM2 PIC 99.                                           00080002
+           05 WS-NUM3 PIC 99V9.                                         00081001
+           05 WS-RES  PIC +99.99.                                       00090001
+           05 WS-REM  PIC 99.                                           00100000
+        PROCEDURE DIVISION.                                             00110000
+        A100-MAINPARA.                                                  00120000
+           MOVE 45 TO WS-NUM1                                           00121002
+           MOVE 50 TO WS-NUM2                                           00122002
+           MOVE 10.0 TO WS-NUM3                                         00123001
+      ************* ADDITION ******************                         00130000
+           ADD WS-NUM1 TO WS-NUM2,WS-NUM3                               00160001
+           DISPLAY WS-NUM1 " , " WS-NUM2 " , " WS-NUM3                  00170001
+      ************* SUBTRACTION ***************                         00180000
+           SUBTRACT WS-NUM2 FROM WS-NUM1 GIVING WS-RES                  00190000
+           DISPLAY WS-NUM1 " - " WS-NUM2 " = " WS-RES                   00200000
+      ************* MULTIPLICATION ************                         00210000
+           MULTIPLY WS-NUM1 BY WS-NUM2 GIVING WS-RES                    00220000
+           ON SIZE ERROR DISPLAY "DEST MEM NOT SUFFICIENT".             00221002
+           DISPLAY WS-NUM1 " * " WS-NUM2 " = " WS-RES                   00230000
+      ************* DIVISION       ************                         00240000
+           DIVIDE WS-NUM1 BY WS-NUM2 GIVING WS-RES REMAINDER WS-REM     00250000
+      *    DIVIDE WS-NUM2 INTO WS-NUM1 GIVING WS-RES                    00260000
+           DISPLAY WS-NUM1 " / " WS-NUM2 " = " WS-RES " REM=" WS-REM    00270000
+      **************COMPUTE STATEMENT ****************                  00280000
+           COMPUTE WS-RES = WS-NUM1 + (WS-NUM2 - WS-NUM3) * WS-NUM4     00290003
+           STOP RUN.                                                    00300000

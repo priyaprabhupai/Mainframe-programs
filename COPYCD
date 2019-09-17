@@ -1,0 +1,13 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. COPYCD.                                              00020000
+       DATA DIVISION.                                                   00030000
+       WORKING-STORAGE SECTION.                                         00040000
+       COPY COPYMEM REPLACING WS-A BY ABC                               00050002
+                              WS-VARS BY WS-VARS1.                      00050103
+       COPY COPYMEM2 REPLACING ==:WS-:== BY ==LK-==.                    00051001
+       COPY COPYMEM3.                                                   00052001
+       PROCEDURE DIVISION.                                              00060000
+            MOVE 'MANIPAL' TO ABC                                       00070000
+            MOVE 50        TO WS-B OF WS-VARS, WS-B OF WS-VARS1         00080002
+            DISPLAY ABC  SPACE WS-B                                     00090000
+            STOP RUN.                                                   00100000

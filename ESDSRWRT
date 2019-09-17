@@ -14,17 +14,24 @@
           02 FS-ID     PIC 99.
           02 FS-NAME   PIC A(10).
           02 FS-LOC    PIC X(3).
-          02           PIC X(5).
+          02           PIC X(25).
         WORKING-STORAGE SECTION.
        77 FS1    PIC 99.
-       77 WS-NAME PIC A(10).
+       77 WS-ID  PIC 99.
        PROCEDURE DIVISION.
+       WRITE-PARA.
+            OPEN OUTPUT INFILE
+            MOVE 10 TO FS-ID
+            MOVE 'RAM' TO FS-NAME
+            MOVE 'BLR' TO FS-LOC
+            WRITE EMPREC
+            DISPLAY "WRITE STS " FS1
+            CLOSE INFILE.
        OPEN-PARA.
-            DISPLAY "WELCOME TO FILE PROGRAMMING".
             OPEN I-O INFILE.
             DISPLAY " OPEN FILE STATUS : " FS1.
        READ-PARA.
-            ACCEPT WS-NAME
+            ACCEPT WS-ID
             PERFORM UNTIL FS1 NOT = 0
                READ INFILE
                AT END
@@ -33,8 +40,8 @@
                   DISPLAY " EMPLOYEE NO   : " FS-ID
                   DISPLAY " EMPLOYEE NAME : " FS-NAME
                   DISPLAY " DEPARTMENT    : " FS-LOC
-                  IF FS-ID = 20
-                     MOVE WS-NAME TO FS-NAME
+                  IF FS-ID = WS-ID
+                     MOVE 'HYD'   TO FS-LOC
                      REWRITE EMPREC
                      DISPLAY "RECORD REWRITTEN : " EMPREC "FS " FS1
                   END-IF
