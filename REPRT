@@ -1,0 +1,69 @@
+       ID             DIVISION.                                         00010000
+       PROGRAM-ID. REPRT.                                               00020000
+       ENVIRONMENT    DIVISION.                                         00030000
+       INPUT-OUTPUT   SECTION.                                          00040000
+       FILE-CONTROL.                                                    00050000
+            SELECT INFILE ASSIGN TO DD1                                 00060000
+            FILE STATUS IS FS1.                                         00070000
+                                                                        00080000
+            SELECT OUTFILE ASSIGN TO DD2                                00090000
+            FILE STATUS IS FS2.                                         00100000
+                                                                        00110000
+       DATA           DIVISION.                                         00120000
+       FILE SECTION.                                                    00130000
+       FD INFILE.                                                       00140000
+       01 INREC.                                                        00150000
+          05 FS-ROLL    PIC X(3).                                       00160000
+          05 FS-NAME    PIC X(5).                                       00170000
+          05 FS-MARK    PIC 9(3).                                       00180000
+          05            PIC X(19).                                      00190000
+                                                                        00200000
+       FD OUTFILE.                                                      00210000
+       01 OUTREC        PIC X(80).                                      00220000
+                                                                        00230000
+       WORKING-STORAGE SECTION.                                         00240000
+       01 HEAD          PIC X(80) VALUE '  ROLL-NO    NAME     MARK'.   00250000
+       01 WS-LINE       PIC X(80) VALUE ALL '-'.                        00260000
+       01 WS-PAGE.                                                      00270000
+          05            PIC X(60).                                      00280000
+          05 PG         PIC X(10) VALUE 'PAGE-NO:'.                     00290000
+          05 WS-PG      PIC 99    VALUE 0.                              00300000
+       77    FS1        PIC 99.                                         00301000
+       77    FS2        PIC 99.                                         00302000
+       01 WS-DET.                                                       00310000
+          05            PIC XXX   VALUE SPACES.                         00310100
+          05 WS-ROLL    PIC X(3).                                       00311000
+          05            PIC X(7)   VALUE SPACES.                        00311100
+          05 WS-NAME    PIC X(5).                                       00312000
+          05            PIC X(5)  VALUE SPACES.                         00312100
+          05 WS-MARK    PIC 9(3).                                       00313000
+       77 WS-LCTR       PIC 99    VALUE 1.                              00314000
+       PROCEDURE DIVISION.                                              00320000
+       MAIN-PARA.                                                       00330000
+            PERFORM OPEN-PARA                                           00340000
+            PERFORM CNTRL-BREAK                                         00340100
+            PERFORM READ-INPUT UNTIL FS1 NOT = 0                        00341000
+            CLOSE INFILE OUTFILE                                        00342000
+            STOP RUN.                                                   00343000
+       CNTRL-BREAK.                                                     00343100
+            WRITE OUTREC FROM WS-PAGE                                   00343200
+            WRITE OUTREC FROM HEAD                                      00343300
+            WRITE OUTREC FROM WS-LINE                                   00343400
+            ADD 1 TO WS-PG.                                             00343500
+            MOVE 0 TO WS-LCTR.                                          00343600
+       READ-INPUT.                                                      00344000
+            READ INFILE                                                 00345000
+                 NOT AT END                                             00346000
+                     MOVE FS-ROLL TO WS-ROLL                            00347000
+                     MOVE FS-NAME TO WS-NAME                            00348000
+                     MOVE FS-MARK TO WS-MARK                            00349000
+                     WRITE OUTREC FROM WS-DET                           00349100
+                     ADD 1        TO WS-LCTR                            00349200
+                     IF WS-LCTR = 5                                     00349300
+                        PERFORM CNTRL-BREAK                             00349400
+                     END-IF                                             00349500
+            END-READ.                                                   00349600
+       OPEN-PARA.                                                       00350000
+            OPEN INPUT INFILE                                           00360000
+            OPEN OUTPUT OUTFILE                                         00370000
+            DISPLAY 'OPEN STATUS' FS1 ' ' FS2.                          00380000
