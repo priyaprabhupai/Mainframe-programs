@@ -1,0 +1,88 @@
+       ID DIVISION.                                                     00010000
+       PROGRAM-ID. PSREAD.                                              00020000
+      ******************************************                        00030000
+      * READING ALL THE RECORDS OF A FILE      *                        00040000
+      ******************************************                        00050000
+       ENVIRONMENT DIVISION.                                            00060000
+       INPUT-OUTPUT SECTION.                                            00070000
+       FILE-CONTROL.                                                    00080000
+            SELECT CFILE ASSIGN TO AS-PFILE                             00081001
+            ORGANIZATION IS SEQUENTIAL                                  00082000
+            ACCESS MODE IS SEQUENTIAL                                   00083000
+            FILE STATUS IS FS1.                                         00084000
+            SELECT RPTFILE ASSIGN TO RPTFILE                            00090000
+            ORGANIZATION IS SEQUENTIAL                                  00100000
+            ACCESS MODE IS SEQUENTIAL                                   00110000
+            FILE STATUS IS FS2.                                         00120000
+       DATA DIVISION.                                                   00130000
+       FILE SECTION.                                                    00140000
+       FD CFILE.                                                        00150001
+       01 CREC.                                                         00160001
+          05 CCODE PIC 999.                                             00170001
+          05 ENAME PIC X(10).                                           00180001
+          05 CNAME PIC XX.                                              00181001
+          05 FILLER PIC X(25).                                          00190001
+       FD RPTFILE.                                                      00200001
+       01 RPTREC   PIC X(40).                                           00210002
+       WORKING-STORAGE SECTION.                                         00220001
+       01 HEAD-1 PIC X(80) VALUE '  CITY      TOTAL  '.                 00230001
+       01 HEAD-2 PIC X(80) VALUE ALL'-'.                                00240001
+       01 DATE-1.                                                       00250001
+          02 FILLER PIC X(10) VALUE ' DATE   : '.                       00260001
+          02 DATE-2 PIC 99/99/99.                                       00270001
+       01 PAGE-1.                                                       00280001
+          02 FILLER PIC X(10) VALUE ' PAGENO : '.                       00290001
+          02 PAGE-2 PIC 99 VALUE 1.                                     00291001
+       01 WS-DET.                                                       00300001
+          02 CITY-DET PIC XX.                                           00310001
+          02          PIC X(5) VALUE SPACES.                            00311001
+          02 CITY-CNT PIC 999.                                          00320001
+       77 NY-CNT PIC 99 VALUE 0.                                        00330001
+       77 MH-CNT PIC 99 VALUE 0.                                        00340001
+       77 DC-CNT PIC 99 VALUE 0.                                        00350001
+       77 FS1    PIC 99.                                                00351001
+       77 FS2    PIC 99.                                                00352001
+       PROCEDURE DIVISION.                                              00360001
+            PERFORM OPEN-PARA                                           00370001
+            IF FS1 = 0 AND FS2 = 0                                      00371001
+               PERFORM HEADER-PARA                                      00371101
+               PERFORM REPORT-PARA                                      00372001
+               PERFORM WRITE-PARA                                       00372101
+               WRITE RPTREC FROM HEAD-2                                 00372201
+            ELSE                                                        00373001
+               DISPLAY 'OPEN FAILED ' FS1 ' AND ' FS2                   00374001
+            END-IF                                                      00375001
+            CLOSE CFILE, RPTFILE                                        00376001
+            STOP RUN.                                                   00377001
+       OPEN-PARA.                                                       00380001
+            OPEN INPUT CFILE                                            00390001
+            OPEN OUTPUT RPTFILE.                                        00400001
+       HEADER-PARA.                                                     00401001
+            ACCEPT DATE-2 FROM DATE                                     00402001
+            WRITE RPTREC FROM DATE-1                                    00403001
+            WRITE RPTREC FROM PAGE-1                                    00404001
+            WRITE RPTREC FROM HEAD-2                                    00405001
+            WRITE RPTREC FROM HEAD-1                                    00406001
+            WRITE RPTREC FROM HEAD-2.                                   00407001
+       REPORT-PARA.                                                     00410001
+            READ CFILE                                                  00420001
+                 NOT AT END                                             00430001
+                     PERFORM CALC-PARA                                  00440001
+            END-READ.                                                   00450001
+       CALC-PARA.                                                       00460001
+            EVALUATE TRUE                                               00461001
+               WHEN (CNAME = 'NY') ADD 1 TO NY-CNT                      00462001
+               WHEN (CNAME = 'MH') ADD 1 TO MH-CNT                      00463001
+               WHEN (CNAME = 'DC')  ADD 1 TO DC-CNT                     00464001
+               WHEN OTHER DISPLAY 'WRONG CNAME'                         00470001
+            END-EVALUATE.                                               00480001
+       WRITE-PARA.                                                      00490001
+            MOVE 'NY' TO CITY-DET                                       00500001
+            MOVE NY-CNT TO CITY-CNT                                     00510001
+            WRITE RPTREC FROM WS-DET                                    00520001
+            MOVE 'MH' TO CITY-DET                                       00530001
+            MOVE MH-CNT TO CITY-CNT                                     00540001
+            WRITE RPTREC FROM WS-DET                                    00550001
+            MOVE 'DC' TO CITY-DET                                       00560001
+            MOVE DC-CNT TO CITY-CNT                                     00570001
+            WRITE RPTREC FROM WS-DET.                                   00580001
